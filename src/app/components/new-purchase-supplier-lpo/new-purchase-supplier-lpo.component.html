@@ -1,0 +1,234 @@
+<div class="gx-wrapper mar-0">
+    <div class="dashboard animated slideInUpTiny animation-duration-3">
+      <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+        <h2 class="title mb-3 mb-sm-0">Purchase Supplier LPO</h2>
+        <div class="form-group col-sm-6 text-right mb-0">
+          <a routerLink="/purchase/supplierLPO" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="gx-card">
+        <div class="gx-card-body">
+          <form [formGroup]="poForm" (ngSubmit)="createLPO()" novalidate>
+            <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label for="voucherNo">VOUCHER NO</label>
+              <input type="text" formControlName="pono" class="form-control"  placeholder="Enter Voucher No" [ngClass]="{ 'is-invalid': submitted && f.pono.errors }" readonly>
+              <div *ngIf="submitted && f.pono.errors" class="invalid-feedback">
+                <div *ngIf="f.pono.errors.required">Voucher No Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="date">DATE</label>
+                <div class="input-group">
+                    <input type="date" formControlName="podate" [ngClass]="{ 'is-invalid': submitted && f.podate.errors }" placeholder="DD-MM-YYYY" class="form-control" [readonly]="isReadOnly">                      
+                    <div class="input-group-append">
+                    </div>
+                    <div *ngIf="submitted && f.podate.errors" class="invalid-feedback">
+                      <div *ngIf="f.podate.errors.required">Date is Required.</div>
+                    </div>
+                </div>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="cutomer">VENDOR NAME</label>
+            <input type="text" formControlName="contactName" [ngbTypeahead]="customerNme" (selectItem)="selectedCustomer($event)" class="form-control" placeholder="Enter Vendor name" [ngClass]="{ 'is-invalid': submitted && f.contactName.errors }" >
+            <div *ngIf="submitted && f.contactName.errors" class="invalid-feedback">
+              <div *ngIf="f.contactName.errors.required">Vendor Name Required.</div>
+            </div>
+            <input type="number" formControlName="contactId" hidden>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+              <a (click)="openFormModal()" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top-24 mr-0">Add Vendor</a>
+          </div>
+          <div class="form-group col-sm-3 px-2 pl-0 d-none">
+            <label for="link">LINK</label>
+            <select class="custom-select" formControlame="link">
+              <option selected disabled>--Select Link--</option>
+              <option>Link 1</option>
+              <option>Link 2</option>
+              <option>Link 3</option>
+              <option>Link 4</option>
+              <option>Link 5</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="paymentTerm">PAYMENT TERM</label>
+            <input type="text" formControlName="paymentTerms" class="form-control" placeholder="Enter Payment Term" [ngClass]="{ 'is-invalid': submitted && f.paymentTerms.errors }">
+            <div *ngIf="submitted && f.paymentTerms.errors" class="invalid-feedback">
+              <div *ngIf="f.paymentTerms.errors.required">Payment Term Required.</div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label>WARRANTY</label>
+            <input type="text" formControlName="warranty" class="form-control" placeholder="Enter Warranty">
+          </div>
+          <!-- <div class="form-group col-sm-3 px-2">
+            <label>AREA</label>
+            <input type="text" class="form-control" formControlName="area" placeholder="Enter Area" [ngClass]="{ 'is-invalid': submitted && f.area.errors }">
+            <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
+              <div *ngIf="f.area.errors.required">Area Required.</div>
+            </div>
+          </div> -->
+          <div class="form-group col-sm-6 px-2 pl-0">
+            <label>SALESMAN</label>
+            <input type="text" formControlName="userName" [ngbTypeahead]="saleMan" (selectItem)="selectedSales($event)" class="form-control" placeholder="Enter Salesman Name" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+              <div *ngIf="f.userName.errors.required">Salesman Name Required.</div>
+            </div>
+            <input type="number" formControlName="userId" hidden>
+          </div>
+          <div class="form-group col-sm-6 px-2">
+            <label>SERVICE NO.</label>
+            <input type="text" formControlName="refno" class="form-control" placeholder="Enter Service No.">
+          </div>          
+          <div class="form-group col-sm-6 px-2">
+              <label for="narration">Scope / Reference</label>
+              <input type="text" class="form-control" placeholder="Enter Scope / Reference" formControlName="naration">
+          </div>
+        <div class="col-lg-6 pt-2">
+          <dropzone class="dropzone-container" (removedFile)="onFileRemoved($event)" [config]="config" [disabled]="disabled" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto" [message]="'Click or drag images here to upload'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)"></dropzone>
+        </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="col-sm-3 px-2 pt-2 float-left">
+                <label><strong class="font-size-15px">Product Details</strong></label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <form [formGroup]="productForm" (ngSubmit)="submit()" novalidate>
+                  <div class="col-sm-2 px-2 pt-2 float-left">
+                    <label>Product Code</label>
+                    <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Code" formControlName="sku" [ngbTypeahead]="searchCode" [ngClass]="{ 'is-invalid': psubmitted && c.sku.errors }"/>
+                    <div *ngIf="psubmitted && c.sku.errors" class="invalid-feedback">
+                      <div *ngIf="c.sku.errors.required">Product Code Required.</div>
+                    </div>
+                    <input type="text" hidden class="form-control"  placeholder="Enter Product Code" formControlName="itemId" />
+                  </div>
+                  <div class="col-sm-2 px-2 pt-2 float-left">
+                    <label>Product Name</label>
+                    <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Name" formControlName="productName" [ngbTypeahead]="searchName" [ngClass]="{ 'is-invalid': psubmitted && c.productName.errors }" />
+                    <div *ngIf="psubmitted && c.productName.errors" class="invalid-feedback">
+                      <div *ngIf="c.productName.errors.required">Product Name Required.</div>
+                    </div>
+                  </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Quantity</label>
+                  <input type="number" formControlName="qty"  class="form-control no-spinners" placeholder="Enter Quantity" [ngClass]="{ 'is-invalid': psubmitted && c.qty.errors }" >
+                  <div *ngIf="psubmitted && c.qty.errors" class="invalid-feedback">
+                    <div *ngIf="c.qty.errors.required">Quantity Required.</div>
+                  </div>
+              </div>            
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Unit Price</label>
+                  <input type="number" formControlName="unitPrice"  class="form-control no-spinners" placeholder="Enter Unit Price" [ngClass]="{ 'is-invalid': psubmitted && c.unitPrice.errors }" >
+                  <div *ngIf="psubmitted && c.unitPrice.errors" class="invalid-feedback">
+                    <div *ngIf="c.unitPrice.errors.required">Unit Price Required.</div>
+                  </div>
+                 
+              </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Reference</label>
+                  <input type="text" formControlName="reference" class="form-control no-spinners" placeholder="Enter Reference">
+              </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                <label>Amount</label>
+                <input type="number" formControlName="amount"  class="form-control no-spinners" placeholder="Amount" [ngClass]="{ 'is-invalid': psubmitted && c.amount.errors }" readonly>
+                <div *ngIf="psubmitted && c.amount.errors" class="invalid-feedback">
+                  <div *ngIf="c.amount.errors.required">Amount Required.</div>
+                </div>
+            </div>
+              </form>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
+              <div class="form-group col-sm-4">
+                  <a class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top" (click)="addProduct();">+ Add Product</a>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2">
+                <div class="col-sm-4 px-2 pt-2 float-left">
+                  <label><strong class="font-size-15px">Product List</strong></label>
+                </div>
+              </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                    <thead>
+                    <tr role="row">
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">S.No</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Product Code</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Product Name</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Quantity</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">UOM</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Unit Price</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Amount</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Reference</th>
+                        <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="gradeA odd" role="row" *ngFor="let item of itemDto;index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{item.sku}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.qty}}</td>
+                        <td>{{item.uom}}</td>
+                        <td>{{item.unitPrice | number:'1.0-2'}}</td>
+                        <td>{{item.amount | number:'1.0-2'}}</td>
+                        <td>{{item.reference}}</td>
+                        <td><a class="btn btn-danger a-btn-slide-text" (click)="deleteEnquiryItem(item)"><span class="zmdi zmdi-delete icon-inline:false"></span></a>
+                            <a class="btn gx-btn-lime a-btn-slide-text"(click)="editItem(item)"><span class="zmdi zmdi-edit icon-inline:false"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
+              <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-left">
+              <div class="col-sm-12 px-2 pt-2">
+                <label>Discount</label>
+                <input type="number" formControlName="discount" class="form-control" placeholder="Enter Discount Amount">
+              </div>
+              <div class="col-sm-12 px-2 pt-2">
+                  <label>VAT</label>
+                  <input type="number" formControlName="vat" class="form-control no-spinners" placeholder="Enter VAT" readonly>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left">
+              <div class="col-sm-6 offset-sm-6">
+                <div class="table-responsive mt-2">
+                  <table class="table table-striped table-bordered table-hover dataTables-example dataTable mt-4">
+                    <tbody>
+                        <tr>
+                          <th>TOTAL</th>
+                          <td>{{total | number:'1.0-2'}}</td>
+                        </tr>
+                        <tr>
+                          <th>TAXABLE AMOUNT</th>
+                          <td>{{totalAfterDis | number:'1.0-2'}}</td>
+                        </tr>
+                        <tr>
+                          <th>GRAND TOTAL</th>
+                          <td>{{grandTotal | number:'1.0-2'}}</td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-12 text-right">
+            <button type="submit" class="gx-btn btn-success gx-btn-sm">SAVE</button>
+            <a *ngxPermissionsOnly="['purchase-lpo-authorize']" (click)="authorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">AUTHORIZE</a>
+            <a routerLink="/purchase/supplierLPO" class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+            <a (click)="reset()" class="gx-btn gx-btn-red gx-btn-sm text-white">RESET</a>
+          </div>
+        </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

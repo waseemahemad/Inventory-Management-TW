@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title"> Purchase Information. </h4>
+  <button type="button" class="close" aria-label="Close"
+   (click)="activeModal.dismiss('Cross click')">
+   <i class="zmdi zmdi-close"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <ngb-tabset>
+    <ngb-tab title="LPO">
+      <ng-template ngbTabContent>
+        <!-- LPO View HTML Goes Here -->
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Invoice">
+      <ng-template ngbTabContent>
+        <!-- Purchase Invoice View HTML Goes Here -->
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>
+<div class="modal-footer">
+</div>

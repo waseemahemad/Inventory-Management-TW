@@ -1,0 +1,96 @@
+<div class="gx-main-content p-0">
+    <div class="gx-wrapper mar-0">
+        <div class="dashboard animated slideInUpTiny animation-duration-3">
+            <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h2 class="title mb-3 mb-sm-0">Purchase Invoice</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="gx-card mb-10px">
+                <div class="gx-card-body">
+                    <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+                        <div class="form-group col-sm-12 text-right">
+                            <a *ngxPermissionsOnly="['purchase-invoice-create']" routerLink="/purchase/new/invoice" class="mybt gx-btn btn-dark btn-rounded gx-btn-sm mt-new mb-0">New</a>
+                            <a *ngxPermissionsOnly="['purchase-invoice-edit']" (click)="editInv()" class="mybt1 gx-btn gx-btn-light-green text-white gx-btn-sm mt-new mb-0">Edit</a>
+                            <a *ngxPermissionsOnly="['purchase-invoice-canDelete']" (click)="delete()" class="delete1 gx-btn btn-dark btn-rounded gx-btn-sm mt-new mb-0 ">Delete</a>
+                        </div>
+                    </div>
+                    <form [formGroup]="searchForm" (ngSubmit)="search()" novalidate>
+                        <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+                            <div class="form-group col-sm-3 px-2">
+                                <label>Purchase Invoice No.</label>
+                                <input type="text" class="form-control" id="inv" placeholder="Enter Purchase Invoice Number" formControlName="grnno">
+                            </div>
+                            <div class="form-group col-sm-3 px-2">
+                                <label>Vendor Name</label>
+                                <input type="text" class="form-control" id="inv1" placeholder="Enter Vendor Name" formControlName="contactname">
+                            </div>
+                            <!-- <div class="form-group col-sm-3 px-2">
+                                <label>STATUS</label>
+                                <select class="form-control" formControlName="status">
+                                    <option selected disabled value="">--Select Status--</option>
+                                    <option value="">All</option>
+                                    <option value = "Saved">Saved</option>
+                                    <option value = "Authorized">Authorized</option>
+                                    <option value = "Pending_Approval_by_Manager">Pending Approval by Manager</option>
+                                    <option value = "Pending_Approval_by_Director">Pending Approval by Director</option>
+                                    <option value = "Unauthorized_by_Manager">Unauthorized by Manager</option>
+                                    <option value = "Unauthorized_by_Director">Unauthorized by Director</option>
+                                </select>
+                            </div> -->
+                            <div class="form-group col-sm-2">
+                                <button type="submit" class="gx-btn gx-btn-light-green gx-btn-sm mt-new mb-0 btn-top-24"><i class="zmdi zmdi-search"></i></button>
+                                <a (click)="clearSearch()" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top-24">Reset</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="gx-card">
+                <div class="gx-card-body">
+                 
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+                            aria-describedby="DataTables_Table_0_info" role="grid">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 52px; text-align: center;">#</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">Date</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Purchase Invoice No.</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Service No.</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Vendor Name</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Status</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Stage</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA odd" role="row" *ngFor="let inv of invoices"> 
+                                    <td class="sorting_1 text-center"><input name="checkbox" [checked]="inv.checked" (change)="toggeleItem($event,inv)" class="m-table-checkbox form-check-input frm-checkbox"
+                                            type="checkbox"></td>
+                                    <td>{{inv.grndate|date:'dd-MM-yyyy'}}</td>
+                                    <td>{{inv.grnno}}</td>
+                                    <td>{{inv.refno}}</td>
+                                    <td>{{inv.contacts}}</td>
+                                    <td>{{inv.status}}</td>
+                                    <td>{{inv.stage}}</td>
+                                    <td>{{inv.netAmt | number:'1.0-2'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="gx-card-footer">
+                            <nav aria-label="navigation">
+                                <ul class="pagination">
+                                    <ngb-pagination [collectionSize]="totalCount" [(page)]="purInvSpcDto.page" [(pageSize)]="purInvSpcDto.size"
+                                    [maxSize]="10" [boundaryLinks]="true" size="sm" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

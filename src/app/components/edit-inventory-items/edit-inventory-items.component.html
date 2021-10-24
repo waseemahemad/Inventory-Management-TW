@@ -1,0 +1,121 @@
+<div class="gx-main-content">
+    <div class="gx-wrapper mar-0">
+        <div class="dashboard animated slideInUpTiny animation-duration-3">
+            <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center"><h2
+                    class="title mb-3 mb-sm-0">Items > Edit</h2>
+                    <div class="form-group col-sm-6 text-right mb-0">
+                      <a routerLink="/inventory/item" class="gx-btn btn-success gx-btn-sm mt-new mb-0">Back</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="productForm" (ngSubmit)="submit()" novalidate>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="gx-card float-left">
+                <div class="gx-card-body">
+                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left">
+                        <div class="col-sm-8 px-2">
+                          <label>Product Name</label>
+                          <input type="hidden" formControlName="id" />
+                          <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }" class="form-control" placeholder="Enter Product Name">
+                          <div *ngIf="submitted && fc.name.errors" class="invalid-feedback">
+                            <div *ngIf="fc.name.errors.required">Product name is required.</div>
+                          </div>
+                        </div>
+                        <div class="col-sm-8 px-2 pt-2">
+                          <label for="cutomer">Unit</label>
+                          <input type="number" formControlName="unit" class="form-control" placeholder="Enter Unit">
+                        </div>
+                        <div class="col-sm-8 px-2 pt-2">
+                          <label>Product Code</label>
+                          <input type="text" formControlName="sku" class="form-control" placeholder="Enter Product Code" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }">
+                          <div *ngIf="submitted && fc.sku.errors" class="invalid-feedback">
+                            <div *ngIf="fc.sku.errors.required">Product code is required.</div>
+                          </div>
+                        </div>
+                        <div class="col-sm-8 px-2 pt-2">
+                          <label>UOM</label>
+                          <select formControlName="uom"  class="custom-select" [ngClass]="{ 'is-invalid': submitted && fc.uom.errors }">
+                            <option value="" selected disabled>--Select UOM--</option>  
+                            <option *ngFor='let listofval of listofValDto' [value]="listofval.value">
+                                {{listofval.value}}
+                              </option>
+                            </select>
+                            <div *ngIf="submitted && fc.uom.errors" class="invalid-feedback">
+                              <div *ngIf="fc.uom.errors.required">UOM is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left">
+                        <div class="col-sm-8 px-2">
+                            <label>Upload Image</label>
+                          <input type="file">
+                        </div>
+                      </div>
+                      <div class="w-100"></div>
+                      <div CLASS="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12 float-left p-0">
+                      <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 float-left mt-3">
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3 p-0">
+                              <div class="col-sm-12 px-2">
+                                <label><strong>Sales Information</strong></label>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
+                              <div class="col-sm-8 px-2">
+                                <label>Rate</label>
+                                <input type="number" formControlName="saleRate" class="form-control" placeholder="Enter Rate">
+                              </div>
+                              <div class="col-sm-8 px-2 pt-2">
+                                <label>Description</label>
+                                <input type="text" formControlName="saleDiscription" class="form-control" placeholder="Enter Description">
+                              </div>
+                            </div>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 float-left mt-3">
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3 p-0">
+                              <div class="col-sm-12 px-2">
+                                <label><strong>Purchase Information</strong></label>
+                              </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
+                              <div class="col-sm-8 px-2">
+                                <label>Rate</label>
+                                <input type="number" formControlName="purchaseRate" class="form-control" placeholder="Enter Rate">
+                              </div>
+                              <div class="col-sm-8 px-2 pt-2">
+                                <label>Description</label>
+                                <input type="text" formControlName="purchaseDiscription" class="form-control" placeholder="Enter Description">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3 mt-3 float-left">
+          <div class="col-sm-12 px-2">
+            <input type="checkbox" >
+            <label><strong>Track Inventory</strong></label>
+          </div>
+        </div> -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+          <!-- <div class="col-sm-4 px-2 float-left">
+            <label>Account</label>
+              <select formControlName="inventoryAccount" class="custom-select my-1 mr-sm-2">
+              <option selected disabled value="">--Inventory Asset--</option>
+              <option value="1">Inventory Asset-1</option>
+              <option value="2">Inventory Asset-2</option>
+              <option value="3">Inventory Asset-3</option>
+              </select>
+          </div> -->
+          <div class="col-sm-4 px-2 pt-2 float-left">
+            <label>Opening Stock</label>
+            <input type="number" formControlName="openingStock" class="form-control" placeholder="Enter Opening Stock" readonly>
+          </div>
+          <div class="col-sm-4 px-2 pt-2 float-left">
+            <label>Opening Stock Rate Per Unit</label>
+            <input type="number" formControlName="stockRateperunit" class="form-control" placeholder="Enter Opening Stock Rate Per Unit" readonly>
+          </div>
+        </div>
+                        <div class="form-group col-sm-4 float-left mt-3">
+                            <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0">Save</button>
+                            <a routerLink="/inventory/item" class="gx-btn btn-danger gx-btn-sm mt-new mb-0">Cancel</a>
+      

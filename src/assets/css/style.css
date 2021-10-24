@@ -1,0 +1,197 @@
+::-webkit-scrollbar {width: 10px;}
+::-webkit-scrollbar-track {background: #f1f1f1;}
+::-webkit-scrollbar-thumb {background: #808080;}
+::-webkit-scrollbar-thumb:hover {background: #555;}
+
+body { overflow: hidden; }
+
+.mar-0{
+    margin-bottom: 0px !important;
+    flex: none;
+}
+
+.mt-10{
+    margin-top: 15px;
+}
+.mb-10px {
+    margin-bottom: 10px !important;
+}
+
+.nav-menu{
+    overflow: auto;
+}
+ul.nav-menu li i{
+    font-size: 20px;
+}
+.cur-1 .zmdi{
+    font-size: 30px;
+}
+
+.gx-sidebar{
+    background-color: #716aca;
+}
+ul.nav-menu>li.selected>a, ul.nav-menu>li.open>a, ul.nav-menu>li>a:hover, ul.nav-menu>li>a:focus {
+    background-color: #fff;
+    color: #fe967a;
+}
+ul.nav-menu li.menu.open .sub-menu li.active>a{
+    background-color: #fe967a !important;
+    color: #fff !important;
+}
+
+ul.nav-menu li a{
+    color: #fff;
+    padding: 10px 20px;
+}
+
+ul.nav-menu li ul{
+    background-color: #716aca;
+}
+ul.nav-menu li.menu .sub-menu li>a:hover, ul.nav-menu li.menu .sub-menu li>a:focus, ul.nav-menu li.menu.open .sub-menu li.active>a:before, ul.nav-menu li.menu .sub-menu li>a:focus:before, ul.nav-menu li.menu .sub-menu li>a:hover:before{
+    background-color:#fff;
+    color: #fe967a;
+}
+ul.nav-menu li.menu.selected>a:before, ul.nav-menu li.menu.open>a:before, ul.nav-menu li.menu>a:focus:before, ul.nav-menu li.menu li>a:hover:before{
+    color: #ff5722;
+}
+ul.nav-menu li.menu>a:before{
+    color:#fe967a;
+}
+.logo-1{
+    width: 70%;
+}
+.cur-1{
+    cursor: pointer;
+}
+.zmdi-menu{
+    font-size: 30px;
+}
+.zmdi-long-arrow-left{
+    color: #fff;
+}
+.page-item.active .page-link{
+    background-color: #716aca;
+    border-color: #716aca;
+}
+.gx-btn-light-green{
+background-color: #8bc34a !important;
+}
+
+@media screen and (max-width:500px){
+    .gx-main-content{
+        padding:0;
+    }
+}
+.gx-main-content {
+    padding: 5px !important;
+    overflow-x: hidden;
+}
+h2.title.mb-3.mb-sm-0 {
+    text-transform: uppercase;
+    font-size: 24px;
+}
+.btn-top { 
+    margin-top: 4px;
+}
+.btn-top-24 {
+    margin-top: 24px;
+}
+.gx-btn-light-blue{
+    background-color:#eccc06;
+    transition:0.5s;
+}
+.gx-btn-light-blue:hover{
+    background-color:#eccc06 !important;
+    transition:0.5s;
+}
+.btn-success{
+    background-color:#fe967a;
+    transition:0.5s;
+    border-collapse: #fe967a !important;
+}
+.btn-success:hover{
+    background-color:#f69277;
+    transition:0.5s;
+}
+.gx-btn-light-green {
+    background-color: #716aca !important;
+    transition:0.5s;
+}
+.btn-danger{
+background-color:#ff5722;
+transition:0.5s;
+}
+.gx-btn-lime{
+    background-color: #716aca !important;
+    transition:0.5s;
+}
+.btn-warning{
+    background-color:#716aca;
+}
+
+footer{
+    border-top:1px solid #fe967a;
+    background-color:#fff;
+    padding-top:20px;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p{
+    margin-left:auto;
+    margin-right:auto;
+    font-weight:bold;
+    color:#716aca;
+}
+
+label{
+    font-weight: bold;
+}
+input.m-table-checkbox.form-check-input.frm-checkbox {
+    margin-left: -6px;
+}
+.page-heading {
+    margin-bottom: 10px !important;
+}
+.ml-5rem {
+    margin-left: 5rem !important;
+}
+/* hide up/down arrows ("spinners") on input fields marked type="number" */
+.no-spinners {
+    -moz-appearance:textfield;
+  }
+  
+  .no-spinners::-webkit-outer-spin-button,
+  .no-spinners::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .font-size-15px  {
+      font-size: 15px;
+  }
+  .font-size-18px  {
+      font-size: 18px !important;
+  }
+  label {
+      text-transform: uppercase;
+  }
+  .gx-card {
+      padding-top: 10px !important;
+  }
+
+  .dropzone .dz-preview .dz-image{
+      width: 60px !important;
+      height: 60px !important;
+      border-radius: 5px !important;
+  }
+
+  .dropzone .dz-preview .dz-details{
+      padding: 0 !important;
+  }
+
+  dropzone[fxlayout] > .dropzone.dz-wrapper.dz-multiple{
+    justify-content: start !important;
+  }
+  dropzone > .dropzone.dz-wrapper .dz-message{
+      overflow: hidden !important;
+  }

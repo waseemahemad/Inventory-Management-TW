@@ -1,0 +1,91 @@
+<div class="gx-wrapper mar-0">
+  <div class="dashboard animated slideInUpTiny animation-duration-3">
+    <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Opening Balance</h2>
+      <a routerLink="/journal/opening-balance" class="gx-btn btn-success gx-btn-sm">Back</a>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form [formGroup]="OpForm" novalidate (ngSubmit)="submit()" class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+          <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label for="voucherNo">VOUCHER NO</label>
+              <input type="text" class="form-control" formControlName="openingno" placeholder="Enter Voucher No" [ngClass]="{ 'is-invalid': submitted && fc.openingno.errors }" readonly>
+              <div *ngIf="submitted && fc.openingno.errors" class="invalid-feedback">
+                <div *ngIf="fc.openingno.errors.required">Voucher No Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="date">DATE</label>
+              <div class="input-group">
+                <input placeholder="DD-MM-YYYY" formControlName="openingdate" name="podate" id="podate" type="date" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && fc.openingdate.errors }" [readonly]="isReadOnly">
+                <div class="input-group-append">
+                </div>
+                <div *ngIf="submitted && fc.openingdate.errors" class="invalid-feedback">
+                  <div *ngIf="fc.openingdate.errors.required">Opening Date Required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label>Account Type</label>
+              <select class="custom-select" formControlName="accounttype" [ngClass]="{ 'is-invalid': submitted && fc.accounttype.errors }">
+                <option selected disabled value="">--Select Account Type--</option>
+                <option>Customer</option>
+                <option>Vendor</option>
+                <option>Bank</option>
+                <option>Accounts</option>
+              </select>
+              <div *ngIf="submitted && fc.accounttype.errors" class="invalid-feedback">
+                <div *ngIf="fc.accounttype.errors.required">Account Type Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label>Account Name</label>
+              <input type="text" class="form-control" placeholder="Enter Account Name" formControlName="accountname" (selectItem)="selectedContact($event)" [ngbTypeahead]="searchContact" [ngClass]="{ 'is-invalid': submitted && fc.accountname.errors }">
+              <div *ngIf="submitted && fc.accountname.errors" class="invalid-feedback">
+                <div *ngIf="fc.accountname.errors.required">Account Name Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label>Amount</label>
+              <input type="number" class="form-control" placeholder="Enter Amount" formControlName="amount" [ngClass]="{ 'is-invalid': submitted && fc.amount.errors }">
+              <div *ngIf="submitted && fc.amount.errors" class="invalid-feedback">
+                <div *ngIf="fc.amount.errors.required">Amount Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label>Type</label>
+              <select class="custom-select" formControlName="type" [ngClass]="{ 'is-invalid': submitted && fc.type.errors }">
+                <option selected disabled value="">--Select Type--</option>
+                <option>Credit</option>
+                <option>Debit</option>
+                <!-- <option>Type-3</option> -->
+              </select>
+              <div *ngIf="submitted && fc.type.errors" class="invalid-feedback">
+                <div *ngIf="fc.type.errors.required">Type Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label>Narration</label>
+              <input type="text" class="form-control" placeholder="Enter Narration" formControlName="narration" [ngClass]="{ 'is-invalid': submitted && fc.narration.errors }">
+              <div *ngIf="submitted && fc.narration.errors" class="invalid-feedback">
+                <div *ngIf="fc.narration.errors.required">Narration Required.</div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 text-right">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm">SAVE</button>
+              <a *ngxPermissionsOnly="['journal entries-opening balance-authorize']" (click)="authorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">AUTHORIZE</a>
+              <a routerLink="/journal/opening-balance" class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+              <a (click)="reset()" class="gx-btn gx-btn-red gx-btn-sm text-white">RESET</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

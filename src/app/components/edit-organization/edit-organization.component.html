@@ -1,0 +1,82 @@
+
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+  <h2 class="title mb-3 mb-sm-0">Edit Organization</h2>
+  <nav class="mb-0 breadcrumb">
+    <span class="active breadcrumb-item">Organization </span>
+      <span class="active breadcrumb-item">Create/Update</span>
+  </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0" [formGroup]="createCompanyForm" (ngSubmit)="createCompany()" novalidate>
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="compName">Company Name</label>
+            <input type="text" class="form-control" placeholder="Enter Company Name" formControlName="name">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="compEmail">Company Email</label>
+            <input type="email" class="form-control" placeholder="Enter Company Email" formControlName="email">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="contPhone">Work Phone</label>
+            <input type="number" class="form-control" placeholder="Enter Work Number" formControlName="phoneNo">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="mobilePhone">Moble Phone</label>
+            <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNo">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="website">Website</label>
+            <input type="text" class="form-control" placeholder="Enter Website" formControlName="website">
+          </div>
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="link">Country</label>
+            <select class="custom-select" formControlName="countryId">
+              <option selected disabled>--Select Country--</option>
+              <option *ngFor="let c of countries" [ngValue]="c.id">{{ c.name }}</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="link">State</label>
+            <select class="custom-select" formControlName="stateId">
+              <option selected disabled>--Select State--</option>
+              <option *ngFor="let s of states" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="link">City</label>
+            <select class="custom-select" formControlName="cityId">
+              <option selected disabled>--Select City--</option>
+              <option *ngFor="let c of cities" [ngValue]="c.id">{{ c.name }}</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="zipCode">Zip Code</label>
+            <input type="number" class="form-control" placeholder="Enter Zip Code" formControlName="zipCode">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="fax">Fax</label>
+            <input type="number" class="form-control" placeholder="Enter Fax Number" formControlName="fax">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label>TRN number</label>
+            <input type="text" class="form-control" placeholder="Enter TRN Number" formControlName="trnno">
+          </div>
+          <div class="form-group col-sm-12 px-2">
+            <label>Address</label>
+            <textarea class="form-control h-100" placeholder="Enter Complete Address" formControlName="address"></textarea>
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+            <div class="form-group col-sm-4">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Save</button>
+              <a routerLink="/list/user" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

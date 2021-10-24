@@ -1,0 +1,133 @@
+<div class="gx-wrapper mar-0">
+  <div class="dashboard animated slideInUpTiny animation-duration-3">
+    <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Bank Payment > Edit</h2>
+      <div class="form-group col-sm-6 text-right mb-0">
+          <a (click)="openFormModal()" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Add Bank</a>
+        <a routerLink="/payment/bank" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form [formGroup]="bankPaymentForm" (ngSubmit)="submit()" novalidate>
+          <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+        <div class="row col-sm-12">
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="voucherNo">VOUCHER NO</label>
+            <input type="text" formControlName="paymentno" class="form-control"  placeholder="Enter Voucher No" [ngClass]="{ 'is-invalid': submitted && f.paymentno.errors }" readonly>
+            <div *ngIf="submitted && f.paymentno.errors" class="invalid-feedback">
+              <div *ngIf="f.paymentno.errors.required">Vouvher No Required.</div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="date">DATE</label>
+              <div class="input-group">
+                  <input formControlName="paymentdate" placeholder="DD-MM-YYYY"  type="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.paymentdate.errors }" [readonly]="isReadOnly" >                      
+                  <div class="input-group-append">
+                  </div>
+                  <div *ngIf="submitted && f.paymentdate.errors" class="invalid-feedback">
+                    <div *ngIf="f.paymentdate.errors.required">Payment Date Required.</div>
+                  </div>
+              </div>
+        </div>
+        <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="voucherNo">Account Type</label>
+            <select class="form-control" formControlName="accounttype" (change)="onTypeSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.accounttype.errors }">
+                <option selected disabled value="">--Select Account Type--</option>
+                <option>Accounts</option>
+                <option>Vendor</option>
+            </select>
+            <div *ngIf="submitted && f.accounttype.errors" class="invalid-feedback">
+              <div *ngIf="f.accounttype.errors.required">Account Type Required.</div>
+            </div>
+          </div>
+          <div *ngIf="vendorSelected" class="form-group col-sm-3 px-2 pl-0">
+            <label for="voucherNo">Vendor Name</label>
+            <input type="text" formControlName="contactName" (selectItem)="selectedVendor($event)" [ngbTypeahead]="searchVendor" class="form-control"  placeholder="Enter Vendor Name" [ngClass]="{ 'is-invalid': submitted && vendorSelected && (f.contactName.value ==='' || f.contactName.value === null || f.contactName.value === undefined) }">
+            <input type="hidden" formControlName="contactId"  class="form-control" >
+            <div *ngIf="submitted && vendorSelected && (f.contactName.value ==='' || f.contactName.value === null || f.contactName.value === undefined)" class="invalid-feedback">
+              Vendor Name Required.
+            </div>
+          </div>
+          <div *ngIf="accountsSelected" class="form-group col-sm-3 px-2 pl-0">
+            <label for="voucherNo">Accounts</label>
+            <input type="text" formControlName="accountName" (selectItem)="selectedAccount($event)" [ngbTypeahead]="searchAccount" class="form-control"  placeholder="Enter Account Name" [ngClass]="{ 'is-invalid': submitted && accountsSelected && (f.accountName.value ==='' || f.accountName.value === null || f.accountName.value === undefined) }">
+            <input type="hidden" formControlName="accountId"  class="form-control" >
+            <div *ngIf="submitted && accountsSelected && (f.accountName.value ==='' || f.accountName.value === null || f.accountName.value === undefined)" class="invalid-feedback">
+              Account Name Required.
+            </div>
+          </div>
+    </div>
+    <div class="row col-sm-12">
+    <div class="form-group col-sm-3 px-2 pl-0">
+      <label>Bank</label>
+      <select formControlName="bankId"  class="custom-select" [ngClass]="{ 'is-invalid': submitted && f.bankId.errors }">
+        <option value=null selected disabled>--Select Bank--</option>
+        <option *ngFor='let bank of bankDto' [value]="bank.id">
+          {{bank.bankName}}
+        </option>
+      </select>
+      <div *ngIf="submitted && f.bankId.errors" class="invalid-feedback">
+        <div *ngIf="f.bankId.errors.required">Bank Name Required.</div>
+      </div>
+    </div>
+        <div class="form-group col-sm-3 px-2">
+          <label>Cheque No.</label>
+          <input type="text" formControlName="chequeno"  class="form-control" placeholder="Enter Cheque No.">
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label>Amount</label>
+          <input type="number" formControlName="amount" class="form-control" placeholder="Enter Amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+          <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+            <div *ngIf="f.amount.errors.required">Amount Required.</div>
+          </div>
+        </div>
+        <div *ngIf="vendorSelected" class="form-group col-sm-3 px-2">
+          <label>Total Amount</label>
+          <input type="text"   class="form-control" placeholder="Calculated Amount" readonly value="{{totalAmounts | number:'1.0-2'}}">
+        </div>
+    </div>
+          <div *ngIf="vendorSelected" class="table-responsive">
+              <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                  <thead>
+                  <tr role="row">
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Invoice No.</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Invoice Date</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Adjustment Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Balance</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Paid Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Total Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let grn of paymentSlaveDto; index as i" class="gradeA odd" role="row">
+                      <td>{{grn.grnno}}</td>
+                      <td>{{grn.grndate | date:'dd-MM-yyyy'}}</td>
+                      <td>
+                        <input type="number" [(ngModel)]="grn.adjustmentAmt" name="adjustmentAmt" [ngModelOptions]="{standalone: true}" (keyup)="changeBalance($event,grn)" placeholder="Enter Adjustment Amounts"  class="form-control" >
+                      </td>
+                      <td>{{grn.remainingAmt | number:'1.0-2'}}</td>
+                      <td>{{grn.balance | number:'1.0-2'}}</td>
+                      <td>{{grn.paidAmt | number:'1.0-2'}}</td>
+                      <td>{{grn.amount | number:'1.0-2'}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-12 col-sm-12 text-right">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm">SAVE</button>
+              <a *ngxPermissionsOnly="['payments-bank-authorize']" (click)="authorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">AUTHORIZE</a>
+              <a *ngxPermissionsOnly="['payments-bank-unAuthorize']" (click)="unauthorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">UN-AUTHORIZE</a>
+              <a routerLink="/payment/bank" class="gx-btn btn-danger gx-btn-sm text-white">CLOSE</a>
+              <!-- <a (click)="reset()" class="gx-btn gx-btn-red gx-btn-sm">RESET</a> -->
+            </div>
+          </div></form>
+      </div>
+    </div>
+  </div>
+</div>

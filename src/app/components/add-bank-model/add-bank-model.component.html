@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New Bank </h4>
+  <button type="button" class="close" aria-label="Close"
+   (click)="activeModal.dismiss('Cross click')">
+   <i class="zmdi zmdi-close"></i>
+  </button>
+</div>
+<div class="modal-body">
+    <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0" [formGroup]="bankForm" (ngSubmit)="createNewBank()" novalidate>
+      <div class="form-group col-sm-3 px-2 pl-0">
+        <label for="compName">Bank Name</label>
+        <input type="text" class="form-control"  placeholder="Enter Bank Name" formControlName="bankName" [ngClass]="{ 'is-invalid': submitted && fc.bankName.errors }">
+        <div *ngIf="submitted && fc.bankName.errors" class="invalid-feedback">
+          <div *ngIf="fc.bankName.errors.required">Bank Name Required.</div>
+        </div>
+      </div>
+    <div class="form-group col-sm-3 px-2">
+      <label for="compEmail">Bank Code</label>
+      <input type="email" class="form-control" placeholder="Enter Company Code" formControlName="bankCode" [ngClass]="{ 'is-invalid': submitted && fc.bankCode.errors }">
+      <div *ngIf="submitted && fc.bankCode.errors" class="invalid-feedback">
+        <div *ngIf="fc.bankCode.errors.required">Bank Code Required.</div>
+      </div>
+    </div>
+    <div class="form-group col-sm-3 px-2">
+      <label for="bankCode">Bank Ext</label>
+      <input type="text" class="form-control" placeholder="Enter Bank Ext" formControlName="bankExtNo" >
+    </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+          <div class="form-group col-sm-4">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Save</button>
+              <a (click)="activeModal.dismiss('Close clicked')" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Cancel</a>
+          </div>
+        </div>
+      </form>
+
+
+</div>
+<div class="modal-footer">
+</div>

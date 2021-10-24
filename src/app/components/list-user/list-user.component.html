@@ -1,0 +1,64 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+    <h2 class="title mb-3 mb-sm-0">Users</h2>
+    <nav class="mb-0 breadcrumb">
+        <a routerLink="/list/user" class="breadcrumb-item">Users</a>
+        <span class="active breadcrumb-item">List</span>
+    </nav>
+</div>
+<div class="col-xl-12 col-sm-12">
+    <div class="gx-card">
+        <div class="gx-card-header">
+            <a class="gx-btn gx-btn-lime text-white gx-btn-sm" (click)="editUser()">
+                <i class="zmdi zmdi-edit"></i>
+                <span>Edit</span>
+            </a>
+            <!-- <a  (click)="resetPassword()" class="gx-btn gx-btn-blue text-white gx-btn-sm">
+                <i class="zmdi zmdi-key"></i>
+                <span>Reset Password</span>
+            </a>
+            <a (click)="deActiveUser()"  class="gx-btn gx-btn-deep-orange text-white gx-btn-sm">
+                <i class="zmdi zmdi-power-off"></i>
+                <span>Activate / Deactivate</span>
+            </a> -->
+        </div>
+        <div class="gx-card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Name</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Roles</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="gradeA even" *ngFor="let user of userList">
+                            <td class="sorting_1 text-center">
+                                <input name="checkbox" [checked]="user.checked" form-control-name="markuser" type="checkbox" class="form-check-input frm-checkbox"
+                                    (change)="toggeleItem($event,user)" value="">
+                            </td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.username}}</td>
+                            <td>{{user.roles}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.mobile}}</td>
+                            <td>{{user.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="gx-card-footer">
+                    <nav aria-label="navigation">
+                        <ul class="pagination">
+                            <ngb-pagination [collectionSize]="totalCount" [(page)]="listSpec.page" [(pageSize)]="listSpec.size"
+                                size="sm" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

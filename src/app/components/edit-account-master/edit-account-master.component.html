@@ -1,0 +1,79 @@
+
+  <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Account Master</h2>
+      <nav class="mb-0 breadcrumb">
+        <span class="active breadcrumb-item">Account Master</span>
+          <span class="active breadcrumb-item">Create</span>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="gx-card">
+          <div class="gx-card-body">
+            <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0" [formGroup]="accountForm" (ngSubmit)="submit()" novalidate>
+              <div class="form-group col-sm-3 px-2">
+                <label>Select Type</label>
+                <select class="form-control" formControlName = "accTypeId" [ngClass]="{ 'is-invalid': submitted && fc.accTypeId.errors }" >
+                  <option selected disabled value=null>--Select Account Type--</option>
+                  <option *ngFor="let acc of accTypes" value={{acc.id}}>{{acc.name}}</option>
+                </select>
+                <div *ngIf="submitted && fc.accTypeId.errors" class="invalid-feedback">
+                  <div *ngIf="fc.accTypeId.errors.required">Select Account Type.</div>
+              </div>
+              </div>
+              <div class="form-group col-sm-3 px-2 pl-0">
+                <label for="compName">Account Category</label>
+                <select class="form-control" (change)="update($event)">
+                  <option  value="0" >--Select Accounts--</option>
+                  <option *ngFor='let a of accountList' [value]="a.id" >{{a.name}}</option>
+                </select>
+              </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="compEmail">Name</label>
+              <input type="email" class="form-control" placeholder="Enter Bank Code" formControlName="name" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }" >
+              <div *ngIf="submitted && fc.name.errors" class="invalid-feedback">
+                <div *ngIf="fc.name.errors.required">Name is Required.</div>
+            </div>
+              
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="bankCode">Code</label>
+              <input type="text" class="form-control" placeholder="Enter Bank Ext" formControlName="code"     [ngClass]="{ 'is-invalid': submitted && fc.code.errors }" >
+              <div *ngIf="submitted && fc.code.errors" class="invalid-feedback">
+                <div *ngIf="fc.code.errors.required">Code is Required.</div>
+            </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="bankCode">Is Category</label>
+              <div class="clearfix form-inline">
+                <div class="radio radio-inline radio-replace">
+                    <input type="radio" name="category" id="radioInput1" value="Y" formControlName="category" [ngClass]="{ 'is-invalid': submitted && fc.category.errors }" >
+                    <label for="radioInput1">Yes</label>
+                </div>
+                <div class="radio radio-inline radio-replace">
+                    <input type="radio" name="category" id="radioInput2" value="N" formControlName="category" [ngClass]="{ 'is-invalid': submitted && fc.category.errors }" >
+                    <label for="radioInput2">No</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && fc.category.errors" class="invalid-feedback">
+              <div *ngIf="fc.category.errors.required">Category is Required.</div>
+          </div>
+            </div>
+            <div class="form-group col-sm-6 px-2" >
+              <span class="sp-1">
+                  <ul id="dynamicCats" >
+                    <li *ngFor='let a of dynamiccat; index as i' [value]="a.id"><i (click)="remove(a,i)" class="zmdi zmdi-close icon"></i>{{a.name}}</li>
+                  </ul>
+              </span>
+            </div>
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                <div class="form-group col-sm-4">
+                    <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Save</button>
+                    <a routerLink="/accounts/list" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Cancel</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>

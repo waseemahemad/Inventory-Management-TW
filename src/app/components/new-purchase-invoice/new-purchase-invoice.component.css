@@ -1,0 +1,11 @@
+.title{
+    color: blue;
+}
+.mybtn{
+    color: white;
+    background-color: rgba(13, 128, 57, 0.671);
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.4;
+}

@@ -1,0 +1,117 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+    <h2 class="title mb-3 mb-sm-0">Edit</h2>
+    <nav class="mb-0 breadcrumb">
+        <a href="javascript:void(0)" class="breadcrumb-item">Edit </a>
+        <a routerLink="/list/user" class="breadcrumb-item">User</a>
+        <span class="active breadcrumb-item">Form</span>
+    </nav>
+</div>
+<div class="gx-card">
+    <div class="gx-card-header">
+        <h3 class="card-heading">Edit existing user</h3>
+    </div>
+    <div class="gx-card-body">
+        <form id="rootwizard-2" [formGroup]="editUserForm" class="form-wizard validate-form-wizard validate" novalidate="novalidate">
+            <div class="tab-content">
+                <div class="tab-pane  active" id="tab2-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Name</label>
+                                <input placeholder="Name" type="text" formControlName="name" class="form-control required"
+                                    name="name" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }">
+                                    <div *ngIf="submitted && fc.name.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.name.errors.required">Name is Required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="username" class="control-label">User Name</label>
+                                <input placeholder="User Name" type="text" formControlName="username" class="form-control required"
+                                    name="username" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.username.errors }">
+                                    <div *ngIf="submitted && fc.username.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.username.errors.required">Username is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email" class="control-label">Email</label>
+                                <input placeholder="Please enter your email" formControlName="email" type="email" class="form-control required"
+                                    name="email" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.email.errors }">
+                                    <div *ngIf="submitted && fc.email.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.email.errors.required">Email is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mobile" class="control-label">Mobile No</label>
+                                <input placeholder="Please enter your mobile no" type="number" formControlName="mobile"
+                                    class="form-control required email" name="mobile" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.mobile.errors }">
+                                    <div *ngIf="submitted && fc.mobile.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.mobile.errors.required">Mobile No. required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="mobile" class="control-label">Role</label>
+                                <select class="form-control" formControlName="roles" [ngClass]="{ 'is-invalid': submitted && fc.roles.errors }">
+                                    <option value="" selected disabled>--select Role--</option>
+                                    <option value="ROLE_PURCHASE">ROLE_PURCHASE</option>
+                                    <option value="ROLE_SALE">ROLE_SALE</option>
+                                    <option value="ROLE_FINANCE">ROLE_FINANCE</option>
+                                    <option value="ROLE_OPS">ROLE_OPS</option>
+                                    <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                                    <option value="ROLE_EMP">ROLE_EMP</option>
+                                    <option value="MANAGER">MANAGER</option>
+                                    <option value="DIRECTOR">DIRECTOR</option>
+                                </select>
+                                <div *ngIf="submitted && fc.roles.errors" class="invalid-feedback">
+                                    <div *ngIf="fc.roles.errors.required">Please Select A Role</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="password" class="control-label">Password</label>
+                                <input placeholder="Password" type="password" formControlName="password" class="form-control"
+                                    (input)="passwordConfirming()" name="password" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.password.errors }">
+                                <div *ngIf="submitted && fc.password.errors" class="invalid-feedback">
+                                    <div *ngIf="fc.password.errors.required">password is required</div>
+                                </div>
+                                <div class="errMsg" *ngIf="!isMatched">password and confirm password did't match</div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cpassword" class="control-label">Confirm Password</label>
+                                <input placeholder="Confirm password" type="password" formControlName="cPassword" class="form-control"
+                                    (input)="passwordConfirming()" name="cpassword" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && fc.cPassword.errors }">
+                                <div *ngIf="submitted && fc.cPassword.errors" class="invalid-feedback">
+                                    <div *ngIf="fc.cPassword.errors.required">confirm password is required</div>
+                                </div>
+                                <div class="errMsg" *ngIf="!isMatched">password and confirm password did't match</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl">
+                            <a (click)="updateUser()" class="gx-btn btn-success text-white gx-btn-sm">Save Changes</a>
+                            <a routerLink="/list/user" class="gx-btn btn-danger gx-btn-sm">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

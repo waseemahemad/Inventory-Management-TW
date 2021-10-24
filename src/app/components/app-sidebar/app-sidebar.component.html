@@ -1,0 +1,101 @@
+<div id="menu" class="side-nav gx-sidebar">
+  <div class="navbar-expand-lg">
+    <div id="main-menu" class="main-menu navbar-collapse collapse">
+      <ul class="nav-menu">
+        <li class="nav-header text-white font-size-18px text-center">
+          <img src="../../../assets/images/logo.png" class="img-fluid logo-1" >
+        <a href="javascript:void(0)" class="close-icon" (click)="closeMenu()">
+          <i class="zmdi zmdi-long-arrow-left"></i>
+        </a>
+        </li>
+        <li *ngxPermissionsOnly="['sales']" class="menu" [ngClass]="{'open' : sales }" (click)="closeTab('sales')">
+          <a href="javascript:void(0)" (click)="sales = !sales">
+            <i class="zmdi zmdi-shopping-cart-plus"></i>
+            <span class="nav-text">Sales</span>
+          </a>
+          <ul class="sub-menu">
+            <li *ngxPermissionsOnly="['sales-enquiry']"><a routerLink="/sales/enquiry" ><span class="nav-text">Enquiry</span></a></li>
+            <li *ngxPermissionsOnly="['sales-quotation']"><a routerLink="/sales/quotation" ><span class="nav-text">Quotation</span></a></li>
+            <li *ngxPermissionsOnly="['sales-order']"><a routerLink="/sales/order" ><span class="nav-text">Order</span></a></li>
+            <li *ngxPermissionsOnly="['sales-delivery note']"><a routerLink="/sales/deliveryNote" ><span class="nav-text">Delivery Note</span></a></li>
+            <li *ngxPermissionsOnly="['sales-invoice']"><a routerLink="/sales/invoice" ><span class="nav-text">Invoice</span></a></li>
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['purchase']" class="menu" [ngClass]="{'open' : purchase}" (click)="closeTab('purchase')">
+          <a href="javascript:void(0)" (click)="purchase = !purchase">
+              <i class="zmdi zmdi-shopping-cart"></i>
+            <span class="nav-text">Purchase</span>
+          </a>
+          <ul class="sub-menu">
+            <li *ngxPermissionsOnly="['purchase-lpo']" ><a routerLink="/purchase/supplierLPO" ><span class="nav-text">Supplier LPO</span></a></li>
+            <li *ngxPermissionsOnly="['purchase-invoice']" ><a routerLink="/purchase/invoice" ><span  class="nav-text text-transform-none">Invoice</span></a></li>
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['inventory']" class="menu" [ngClass]="{'open' : inventory}" (click)="closeTab('inventory')">
+          <a href="javascript:void(0)" (click)="inventory = !inventory">
+            <i class="zmdi zmdi-store"></i>
+            <span class="nav-text">Inventory</span>
+          </a>
+          <ul class="sub-menu">
+            <!-- <li><a routerLink="/inventory/ledger" ><span class="nav-text">Ledger</span></a></li>
+            <li><a routerLink="/inventory/statement" ><span class="nav-text text-transform-none">Statement</span></a></li> -->
+            <li  *ngxPermissionsOnly="['inventory-items']"><a routerLink="/inventory/item" ><span class="nav-text text-transform-none">Items</span></a></li>
+            <li  *ngxPermissionsOnly="['inventory-items adjust']"><a routerLink="/inventory/item-adjust" ><span class="nav-text text-transform-none">Item Adjustment</span></a></li>
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['payments']" class="menu" [ngClass]="{'open' : payments}" (click)="closeTab('payments')">
+          <a href="javascript:void(0)" (click)="payments = !payments">
+            <i class="zmdi zmdi-card"></i>
+            <span class="nav-text">Payments</span>
+          </a>
+          <ul class="sub-menu">
+            <li *ngxPermissionsOnly="['payments-bank']"><a routerLink="/payment/bank" ><span class="nav-text">Bank Payment</span></a></li>
+            <li *ngxPermissionsOnly="['payments-cash']"><a routerLink="/payment/cash" ><span class="nav-text text-transform-none">Cash Payment</span></a></li>
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['receipts']" class="menu" [ngClass]="{'open' : receipts}" (click)="closeTab('receipts')">
+          <a href="javascript:void(0)" (click)="receipts = !receipts">
+              <i class="zmdi zmdi-receipt"></i>
+            <span class="nav-text">Receipts</span>
+          </a>
+          <ul class="sub-menu">
+            <li *ngxPermissionsOnly="['receipts-bank']"><a routerLink="/reciepts/bank" ><span class="nav-text">Bank Receipts</span></a></li>
+            <li *ngxPermissionsOnly="['receipts-cash']"><a routerLink="/reciepts/cash" ><span class="nav-text text-transform-none">Cash Receipts</span></a></li>
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['journal entries']" class="menu" [ngClass]="{'open' : journal}" (click)="closeTab('journal')">
+          <a href="javascript:void(0)" (click)="journal = !journal">
+            <i class="zmdi zmdi-file-plus"></i>
+            <span class="nav-text">Journal Entries</span>
+          </a>
+          <ul class="sub-menu">
+            <li *ngxPermissionsOnly="['journal entries-opening balance']" ><a routerLink="/journal/opening-balance" ><span class="nav-text text-transform-none">Opening Balance</span></a></li>
+            <li *ngxPermissionsOnly="['journal entries-voucher']" ><a routerLink="/journal/voucher" ><span class="nav-text text-transform-none">Journal Voucher</span></a></li>
+            <!-- <li><a routerLink="/journal/debitNote" ><span class="nav-text text-transform-none">Debit Note</span></a></li>
+            <li><a routerLink="/journal/creditNote" ><span class="nav-text text-transform-none">Credit Note</span></a></li> -->
+          </ul>
+        </li>
+        <li *ngxPermissionsOnly="['contacts']" class="menu" [ngClass]="{'open' : contacts}" (click)="closeTab('contacts')">
+            <a href="javascript:void(0)" (click)="contacts = !contacts">
+              <i class="zmdi zmdi-account-box-phone"></i>
+              <span class="nav-text">Contacts</span>
+            </a>
+            <ul class="sub-menu">
+              <li *ngxPermissionsOnly="['contacts-list']"><a routerLink="/contacts/list" ><span class="nav-text text-transform-none">List Contacts</span></a></li>
+            </ul>
+          </li>
+        <li *ngxPermissionsOnly="['accounts']" class="menu" [ngClass]="{'open' : accounts}" (click)="closeTab('accounts')">
+            <a href="javascript:void(0)" (click)="accounts = !accounts">
+              <i class="zmdi zmdi-accounts"></i>
+              <span class="nav-text">Accounts</span>
+            </a>
+            <ul class="sub-menu">
+              <li *ngxPermissionsOnly="['accounts-list']"><a routerLink="/accounts/list" ><span class="nav-text text-transform-none">List Accounts</span></a></li>
+              <li *ngxPermissionsOnly="['accounts-tree']"><a routerLink="/accounts/tree" ><span class="nav-text text-transform-none">Accounts Tree</span></a></li>
+            </ul>
+          </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

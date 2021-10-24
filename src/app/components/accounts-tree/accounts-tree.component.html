@@ -1,0 +1,5 @@
+<div class="mrTop">
+    <a href="javascript:void(0)" class="i-icon"><ul id="{{'ulmaster'+item.id}}" *ngFor = " let item of accountList"><li (click)="getSubAccs($event,item.id)" id="{{'limaster'+item.id}}">
+    <i class="zmdi zmdi-chevron-right" ></i>{{item.name}}
+  </li></ul></a>
+</div>

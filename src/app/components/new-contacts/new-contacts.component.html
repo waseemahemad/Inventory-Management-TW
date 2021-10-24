@@ -1,0 +1,208 @@
+<div class="gx-main-content">
+  <div class="gx-wrapper mar-0">
+      <div class="dashboard animated slideInUpTiny animation-duration-3">
+          <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+            <h2 class="title mb-3 mb-sm-0">Contact > New</h2>
+                <a routerLink="/contacts/list" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Back</a>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <div class="gx-card">
+          <div class="gx-card-body">
+    <form [formGroup]="newContactForm" (ngSubmit)="createContact()" class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters mb-5" novalidate>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="col-sm-4 px-2 pt-2">
+              <label><strong class="font-size-15px">Contact Details</strong></label>
+            </div>
+          </div>  
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Contact Type</label>
+            <select class="custom-select" formControlName="type" [ngClass]="{ 'is-invalid': submitted && fc.type.errors }">
+              <option value="" selected disabled>--Select Contact Type--</option>
+              <option value="Customer">Customer</option>
+              <option value="Vendor">Vendor</option>
+            </select>
+            <div *ngIf="submitted && fc.type.errors" class="invalid-feedback">
+              <div *ngIf="fc.type.errors.required">Contact Type Is Required.</div>
+            </div>
+          </div>
+          <div class="col-sm-3 px-2 pt-2 float-left">
+            <label>Salutation</label>
+            <select class="custom-select" formControlName="salutation">
+                <option selected disabled value="">--Select Salutation--</option>
+                <option>Mr.</option>
+                <option>Mrs.</option>
+                <option>Miss.</option>
+                <option>Smt.</option>
+            </select>
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && fc.firstName.errors }">
+            <div *ngIf="submitted && fc.firstName.errors" class="invalid-feedback">
+              <div *ngIf="fc.firstName.errors.required">First Name Is Required.</div>
+            </div>
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="lastName">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Company Name</label>
+            <input type="text" class="form-control" placeholder="Enter Company Name" formControlName="companyName" [ngClass]="{ 'is-invalid': submitted && fc.companyName.errors }">
+            <div *ngIf="submitted && fc.companyName.errors" class="invalid-feedback">
+              <div *ngIf="fc.companyName.errors.required">Company Name Is Required.</div>
+            </div>
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Contact Email</label>
+              <input type="text" class="form-control" placeholder="Enter Contact Email" formControlName="email">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Contact Phone</label>
+            <input type="number" class="form-control no-spinners" placeholder="Enter WorkPhone Number" formControlName="phoneNo">
+          </div> 
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Website</label>
+            <input type="text" class="form-control" placeholder="Enter Website" formControlName="website">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>TRN Number</label>
+            <input type="text" class="form-control" placeholder="Enter TRN Number" formControlName="trnno" [ngClass]="{ 'is-invalid': submitted && fc.trnno.errors }">
+            <div *ngIf="submitted && fc.trnno.errors" class="invalid-feedback">
+              <div *ngIf="fc.trnno.errors.required">TRN Number Is Required.</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <!-- Address start here================================================================== -->
+        <h3><strong class="font-size-15px">Address</strong></h3>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+          <div class="col-sm-3 px-2 pt-2 float-left">
+            <label>Attention</label>
+            <input type="text" class="form-control" placeholder="Enter Attention" formControlName="addattension">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Country</label>
+              <select class="custom-select" formControlName="addcountryId">
+                  <option selected disabled value="">--Select Country--</option>
+                  <option *ngFor="let c of countries" [ngValue]="c.id">{{ c.name }}</option>
+                </select>
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>State</label>
+            <select class="custom-select" formControlName="addstateId">
+                <option selected disabled value="">--Select State--</option>
+                <option *ngFor="let s of states" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+        </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>City</label>
+              <select class="custom-select" formControlName="addcityId">
+                  <option selected disabled value="">--Select City--</option>
+                  <option *ngFor="let c of cities" [ngValue]="c.id">{{ c.name }}</option>
+                </select>
+          </div>
+          <div class="col-sm-6 px-2 pt-2">
+            <label>Address</label>
+            <textarea class="form-control" placeholder="Enter Address" rows="3" formControlName="addaddress"></textarea>
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>Zip Code</label>
+            <input type="number" class="form-control no-spinners" placeholder="Enter Zip Code" formControlName="addzipCode">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Fax No.</label>
+              <input type="number" class="form-control no-spinners" placeholder="Enter Fax Number" formControlName="addfax">
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+            <label><strong class="font-size-15px">Contact Persons</strong></label>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+            <div class="col-sm-3 px-2 pt-2">
+                <label>Salutation</label>
+                <select class="custom-select" formControlName="cpsalutation">
+                  <option selected disabled value="">--Select Salutation--</option>
+                  <option>Mr.</option>
+                  <option>Mrs.</option>
+                  <option>Miss.</option>
+                  <option>Smt.</option>
+                </select>
+              </div>
+          <div class="col-sm-3 px-2 pt-2">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="Enter First Name" formControlName="cpfirstName">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Last Name</label>
+              <input type="text" class="form-control" placeholder="Enter Last Name" formControlName="cplastName">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Contact Email</label>
+              <input type="text" class="form-control" placeholder="Enter Contact Email" formControlName="cpemail">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Work Phone</label>
+              <input type="number" class="form-control no-spinners" placeholder="Enter WorkPhone Number" formControlName="cpphoneNo">
+          </div>
+          <div class="col-sm-3 px-2 pt-2">
+              <label>Mobile </label>
+              <input type="number" class="form-control no-spinners" placeholder="Enter Mobile Number" formControlName="cpmobileNo">
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
+          <div class="form-group col-sm-4">
+              <a (click)="addContactPerson()" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">+ Add Contact Person</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2 mb-1">
+            <div class="col-sm-4 px-2 pt-2 float-left">
+              <label><strong class="font-size-15px">Contact Persons List</strong></label>
+            </div>
+          </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                <thead>
+                <tr role="row">
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">Salutation</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">First Name</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Last Name</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Email Address</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Workphone</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Mobile</th>
+                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="gradeA odd" role="row" *ngFor="let cp of contactPersons">
+                    <td>{{cp.salutation}}</td>
+                    <td>{{cp.firstName}}</td>
+                    <td>{{cp.lastName}}</td>
+                    <td>{{cp.email}}</td>
+                    <td>{{cp.phoneNo}}</td>
+                    <td>{{cp.mobileNo}}</td>
+                    <td><button type="button" (click)="delete(cp)" class="btn btn-danger a-btn-slide-text"><span class="zmdi zmdi-delete icon-inline:false"></span></button>
+                        <button type="button" (click)="edit(cp)" [disabled]="isEditing" class="btn gx-btn-lime a-btn-slide-text"><span class="zmdi zmdi-edit icon-inline:false"></span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+          <div class="form-group col-sm-4">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Save</button>
+              <a (click)="reset()" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Reset</a>
+              <a routerLink="/contacts/list" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Cancel</a>
+          </div>
+        </div>
+      </form>
+          </div>
+          </div>
+      </div>
+  </div>
+</div>

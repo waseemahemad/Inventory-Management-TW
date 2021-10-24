@@ -1,0 +1,58 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+    <h2 class="title mb-3 mb-sm-0">Master Module</h2>
+    <nav class="mb-0 breadcrumb">
+        <a routerLink="/admin/master" class="breadcrumb-item">Master Module</a>
+        <span class="active breadcrumb-item">List</span>
+    </nav>
+</div>
+<div class="col-xl-12 col-sm-12 text-right">
+    <div class="gx-card">
+        <div class="gx-card-header">
+            <a class="gx-btn btn-success text-white gx-btn-sm" routerLink="/admin/new-master">
+                <i class="zmdi zmdi-edit"></i>
+                <span>New</span>
+            </a>
+            <a class="gx-btn gx-btn-lime text-white gx-btn-sm" (click)="edit()">
+                <i class="zmdi zmdi-edit"></i>
+                <span>Edit</span>
+            </a>
+            <!-- <a  (click)="resetPassword()" class="gx-btn gx-btn-blue text-white gx-btn-sm">
+              <i class="zmdi zmdi-key"></i>
+              <span>Reset Password</span>
+          </a>
+          <a (click)="deActiveUser()"  class="gx-btn gx-btn-deep-orange text-white gx-btn-sm">
+              <i class="zmdi zmdi-power-off"></i>
+              <span>Activate / Deactivate</span>
+          </a> -->
+        </div>
+        <div class="gx-card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col" class="text-center">Name</th>
+                            <th scope="col" class="text-center">Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mod of list" class="gradeA even">
+                                <td class="sorting_1 text-center"><input name="checkbox" [checked]="mod.checked" class="m-table-checkbox form-check-input frm-checkbox" (change)="toggeleItem($event,mod)"
+                                    type="checkbox"></td>
+                            <td class="text-center">{{mod.name}}</td>
+                            <td class="text-center">{{mod.code}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="gx-card-footer">
+                    <!-- <nav aria-label="navigation">
+                      <ul class="pagination">
+                          <ngb-pagination [collectionSize]="totalCount" [(page)]="listSpec.page" [(pageSize)]="listSpec.size"
+                              size="sm" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                      </ul>
+                  </nav> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

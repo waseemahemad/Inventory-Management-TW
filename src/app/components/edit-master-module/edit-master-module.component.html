@@ -1,0 +1,46 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+        <h2 class="title mb-3 mb-sm-0">Master Module</h2>
+        <nav class="mb-0 breadcrumb">
+            <a routerLink="/admin/master" class="breadcrumb-item">Master Module</a>
+            <span class="active breadcrumb-item">Edit</span>
+        </nav>
+    </div>
+    <div class="gx-card">
+        <div class="gx-card-header">
+            <h3 class="card-heading">New Master Module</h3>
+        </div>
+        <div class="gx-card-body">
+            <form [formGroup]="masterForm" novalidate (ngSubmit)="addModMaster()">
+                <div class="tab-content">
+                    <div class="tab-pane  active" id="tab2-1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="control-label">Name</label>
+                                    <input formControlName="name" placeholder="Enter Name" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }">
+                                    <div *ngIf="submitted && fc.name.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.name.errors.required">Name Is Required.</div>
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Code</label>
+                                    <input formControlName="code" placeholder="Enter Code" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.code.errors }">
+                                    <div *ngIf="submitted && fc.code.errors" class="invalid-feedback">
+                                        <div *ngIf="fc.code.errors.required">Name Is Required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

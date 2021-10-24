@@ -1,0 +1,103 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+  <h2 class="title mb-3 mb-sm-0">Master Sub Module</h2>
+  <nav class="mb-0 breadcrumb">
+      <a routerLink="/admin/sub-master" class="breadcrumb-item">Master Sub Module</a>
+      <span class="active breadcrumb-item">New</span>
+  </nav>
+</div>
+<div class="gx-card">
+  <div class="gx-card-body">
+      <form [formGroup]="subForm"  (ngSubmit)="addSubMod()" novalidate>
+          <div class="tab-content">
+              <div class="tab-pane  active" id="tab2-1">
+                  <div class="row">
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="name" class="control-label">Master Module</label>
+                              <select class="form-control" formControlName="mmId" [ngClass]="{ 'is-invalid': submitted && fc.mmId.errors }">
+                                <option selected disabled value=null>-- Select Master Module --</option>
+                                <option *ngFor="let mod of masters" value={{mod.id}}>{{mod.name}}</option>
+                              </select>
+                              <div *ngIf="submitted && fc.mmId.errors" class="invalid-feedback">
+                                <div *ngIf="fc.mmId.errors.required">Master Module Required.</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Sub Module Name</label>
+                            <input placeholder="Enter Sub Module Name" type="text" class="form-control" formControlName="name">
+                        </div>
+                    </div>
+                      <div class="col-md-4">
+                          <div class="form-group">
+                              <label for="code" class="control-label">Code</label>
+                              <input placeholder="Enter Code" type="text" class="form-control" formControlName="code">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-12 row">
+            <div class="col-sm-6">
+            <div class=" checkbox-info m-2">
+              <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="view">
+              <label for="checkbox8">View</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="edit">
+            <label for="checkbox8">Edit</label>
+          </div>
+          <div class=" checkbox-danger m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="delete">
+            <label for="checkbox14">Delete</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="create">
+            <label for="checkbox8">Create</label>
+          </div>
+          <div class="checkbox-info m-2">
+              <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="print">
+            <label for="checkbox8">Print</label>
+          </div>
+          <div class=" checkbox-info m-2">
+              <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="authorize">
+            <label for="checkbox8">Authorize</label>
+          </div>
+          </div> 
+          <div class="col-sm-6">
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="unAuthorize">
+            <label for="checkbox8">Un Authorized</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="ctq">
+            <label for="checkbox8">Convert To Quotation</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="cto">
+            <label for="checkbox8">Convert To Order</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="ctdn">
+            <label for="checkbox8">Convert To Delivery</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="cti">
+            <label for="checkbox8">Convert To Invoice</label>
+          </div>
+          <div class=" checkbox-info m-2">
+            <input name="checkbox" type="checkbox" value=1 class="form-check-input frm-checkbox"  formControlName="date">
+            <label for="checkbox8">Date Edit</label>
+          </div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-right">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
+        </div>
+      </form>
+  </div>
+</div>

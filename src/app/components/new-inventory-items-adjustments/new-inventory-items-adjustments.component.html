@@ -1,0 +1,88 @@
+<div class="gx-main-content">
+    <div class="gx-wrapper mar-0">
+        <div class="dashboard animated slideInUpTiny animation-duration-3">
+            <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center"><h2
+                    class="title mb-3 mb-sm-0">Inventory Item Adjustment > New</h2>
+                    <div class="form-group col-sm-6 text-right mb-0">
+                      <a routerLink="/inventory/item-adjust" class="gx-btn btn-success gx-btn-sm mt-new mb-0">Back</a>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form [formGroup]="productAdjustForm" (ngSubmit)="submit()">
+      <div class="gx-card">
+      <div class="gx-card-body">
+      <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters mb-5">
+          <div class="col-sm-4 px-2 pt-2">
+            <label>Product Code</label>
+            <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Code" formControlName="sku" [ngbTypeahead]="searchCode" [ngClass]="{ 'is-invalid': submitted && f.sku.errors }"/>
+            <div *ngIf="submitted && f.sku.errors" class="invalid-feedback">
+              <div *ngIf="f.sku.errors.required">Product Code required.</div>
+            </div>
+          </div>
+          <div class="col-sm-4 px-2 pt-2">
+            <label>Product Name</label>
+            <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Name" formControlName="productName" [ngbTypeahead]="searchName" [ngClass]="{ 'is-invalid': submitted && f.productName.errors }"/>
+            <input type="hidden" formControlName="itemId" class="form-control" >
+            <div *ngIf="submitted && f.productName.errors" class="invalid-feedback">
+              <div *ngIf="f.productName.errors.required">Product Name required.</div>
+            </div>
+          </div>
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="date">Date</label>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 px-0">
+                <div class="input-group">
+                    <input type="date" formControlName="date" placeholder="dd-mm-yyyy" name="date" id="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" [readonly]="isReadOnly" >                      
+                    <div class="input-group-append">
+                    </div>
+                    <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                      <div *ngIf="f.date.errors.required">Date required.</div>
+                    </div>
+                  </div>
+            </div>
+          </div>         
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="cutomer">Reference No.</label>
+            <input type="text" formControlName="refno" class="form-control" placeholder="Enter Reference No.">
+          </div>
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="cutomer">Adjustments</label>
+            <select formControlName="type" class="form-control my-1 mr-sm-2" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+              <option selected disabled value="">--Select Adjustment--</option>
+              <option value="in">Stock In</option>
+              <option value="out">Stock Out</option>
+              </select>
+              <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                <div *ngIf="f.type.errors.required">Adjustment Type required.</div>
+              </div>
+          </div>
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="cutomer">Value</label>
+            <input type="number" formControlName="qty" class="form-control" placeholder="Enter Value" [ngClass]="{ 'is-invalid': submitted && f.qty.errors }">
+            <div *ngIf="submitted && f.qty.errors" class="invalid-feedback">
+              <div *ngIf="f.qty.errors.required">Adjustment Value required.</div>
+            </div>
+          </div>
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="cutomer">Stock in Hand</label>
+            <input type="number" formControlName="stockInhand" class="form-control" placeholder="Stock in Hand" readonly>
+          </div>   
+          <div class="col-sm-4 px-2 pt-2">
+            <label for="cutomer">Reason</label>
+            <input type="text" formControlName="reason" class="form-control" placeholder="Enter Reason">
+          </div>
+      </div>
+          <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters">
+              <div class="form-group col-sm-4">
+                  <button type="submit" class="gx-btn btn-success gx-btn-sm mt-new mb-0">Save</button>
+                  <a routerLink="/inventory/item-adjust" class="gx-btn btn-danger gx-btn-sm mt-new mb-0">Cancel</a>
+              </div>
+            </div>
+            </div>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

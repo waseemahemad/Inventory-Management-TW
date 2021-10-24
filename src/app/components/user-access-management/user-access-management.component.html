@@ -1,0 +1,126 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+    <h2 class="title mb-3 mb-sm-0">User Access</h2>
+    <!-- <nav class="mb-0 breadcrumb">
+      <a routerLink="/admin/master" class="breadcrumb-item">Master Sub Module</a>
+      <span class="active breadcrumb-item">New</span>
+  </nav> -->
+</div>
+<div class="gx-card">
+    <div class="gx-card-body">
+        <form [formGroup]="accessForm" (ngSubmit)="submit()" novalidate>
+            <div class="tab-content">
+                <div class="tab-pane  active" id="tab2-1">
+                    <div class="row">
+                            <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="name" class="control-label">Module Selection</label>
+                                        <select class="form-control" formControlName="moduleId"  [ngClass]="{ 'is-invalid': submitted && fc.moduleId.errors }">
+                                            <option selected disabled value=null>-- Select Module --</option>
+                                            <option *ngFor="let mod of listMasters" value={{mod.id}} >{{mod.name}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && fc.moduleId.errors" class="invalid-feedback">
+                                            <div *ngIf="fc.moduleId.errors.required">Please select module.</div>
+                                          </div>
+                                    </div>
+                                </div> 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name" class="control-label">User Selection</label>
+                                <select class="form-control" formControlName="userId"  [ngClass]="{ 'is-invalid': submitted && fc.userId.errors }">
+                                    <option selected disabled value=null>-- Select User --</option>
+                                    <option *ngFor="let user of userList" value={{user.id}}>{{user.name}}</option>
+                                </select>
+                                <div *ngIf="submitted && fc.userId.errors" class="invalid-feedback">
+                                    <div *ngIf="fc.userId.errors.required">Please select user.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Master Access</label>
+                                <div class="col-sm-5 text-center">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="masteraccess" value="1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gx-card-body">
+                <div class="col-sm-12 py-3 pl-0">
+                    <h3 class="title mb-3 mb-sm-0">Sub Module Name</h3>
+                </div>
+                <div class="table-responsive">
+                    <table  class="table table-bordered" formArrayName="useraccessslave">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Sub Mobule Name</th>
+                                <th scope="col" class="text-center">View</th>
+                                <th scope="col" class="text-center">Create</th>
+                                <th scope="col" class="text-center">Edit</th>
+                                <th scope="col" class="text-center">Delete</th>
+                                <th scope="col" class="text-center">Print</th>
+                                <th scope="col" class="text-center">Authorize</th>
+                                <th scope="col" class="text-center">Un-Authorize</th>
+                                <th scope="col" class="text-center">Convert To Quotation</th>
+                                <th scope="col" class="text-center">Convert To Order</th>
+                                <th scope="col" class="text-center">Convert To Delivery</th>
+                                <th scope="col" class="text-center">Convert To Invoice</th>
+                                <th scope="col" class="text-center">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody  >
+                            <tr  *ngFor="let item of this.fc.useraccessslave.controls;let i = index;" class="gradeA even" [formGroupName]="i">
+                                <td tabindex="{{slaveTab+i}}" *ngIf="item.controls.subModName.value!=null">{{item.get('subModName').value}}</td>
+                                <input tabindex="{{slaveTab+i}}" *ngIf="item.controls.moduleSubMasterId.value!=null" type="hidden" formControlName="moduleSubMasterId" >
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.view.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="view" >
+                                    <!-- <span *ngIf="item.controls.view.value===false" style="font:bold;color:red;font-size:20px ">-</span> -->
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.create.value!=null">
+                                    <input name="checkbox" type="checkbox"   class="form-check-input frm-checkbox" formControlName="create" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.edit.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="edit" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.canDelete.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="canDelete" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.print.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="print" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.authorize.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="authorize" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.unAuthorize.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="unAuthorize" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.ctq.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="ctq" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.cto.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="cto" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.ctdn.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="ctdn" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.cti.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="cti" value="1">
+                                </td>
+                                <td class="sorting_1 text-center" tabindex="{{slaveTab+i}}" *ngIf="item.controls.date.value!=null">
+                                    <input name="checkbox" type="checkbox"    class="form-check-input frm-checkbox" formControlName="date" value="1">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="gx-card-footer">
+                    </div>
+                </div>
+                <div class="col-sm-12 text-right">
+                    <button type="submit" class="btn gx-btn-light-green">Update</button>
+                    <!-- <a type="click" routerLink="" class="btn btn-danger">Cancel</a> -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+              <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <div class="form-outline form-white mb-4">
+                    <input type="email" id="typeEmailX" formControlName="username" class="form-control form-control-lg" placeholder="UserName" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"  />
+                    <label class="form-label" for="typeEmailX">Username</label>
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">Username Required.</div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline form-white mb-4">
+                    <input type="password" id="typePasswordX" formControlName="password" class="form-control form-control-lg" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <label class="form-label" for="typePasswordX">Password</label>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password Required.</div>
+                    </div>
+                  </div>
+
+                  <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> -->
+
+                  <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- <div>
+              <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

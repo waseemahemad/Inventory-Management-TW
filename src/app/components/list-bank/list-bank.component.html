@@ -1,0 +1,66 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+  <h2 class="title mb-3 mb-sm-0">List Bank Master</h2>
+  <nav class="mb-0 breadcrumb">
+    <span class="active breadcrumb-item">Bank Master</span>
+      <span class="active breadcrumb-item">List</span>
+  </nav>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+      <form>
+    <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+    <!-- <div class="form-group col-sm-3 px-2 pl-0">
+      <label>Bank</label>
+      <select class="custom-select">
+        <option selected disabled>--Select Bank--</option>
+        <option>Bank</option>
+        <option>Bank</option>
+        <option>Bank</option>
+      </select>
+    </div> -->
+    <div class="form-group col-sm-9 px-2 pl-0 text-right">
+        <a class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top" routerLink="/new/bank">New</a>
+        <a (click)="edit()" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Edit</a>
+    </div>
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                  <thead>
+                  <tr role="row">
+                      <th tabindex="0" rowspan="1" colspan="1">S.No</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Bank Name</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Bank Code</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Bank Ext</th>
+                      <!-- <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">TRN Number</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Country</th> -->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="gradeA odd" role="row" *ngFor="let bank of banks">
+                    <td class="sorting_1 text-center">
+                      <input name="checkbox" [checked]="bank.checked" class="m-table-checkbox form-check-input frm-checkbox" type="checkbox" (change)="toggeleItem($event,bank)">
+                    </td>
+                      <td>{{bank.bankName}}</td>
+                      <td>{{bank.bankCode}}</td>
+                      <td>{{bank.bankExtNo}}</td>
+                      <!-- <td>NA</td>
+                      <td>NA</td> -->
+                  </tr>
+                  </tbody>
+              </table>
+              <div class="gx-card-footer">
+                <nav aria-label="navigation">
+                    <ul class="pagination">
+                        <ngb-pagination [collectionSize]="totalCount" [(page)]="bankSpec.page" [(pageSize)]="bankSpec.size"
+                        [maxSize]="10" [boundaryLinks]="true"  size="sm" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                    </ul>
+                </nav>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

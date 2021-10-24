@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New Account Group </h4>
+  <button type="button" class="close" aria-label="Close"
+   (click)="activeModal.dismiss('Cross click')">
+   <i class="zmdi zmdi-close"></i>
+  </button>
+</div>
+<div class="modal-body">
+ 
+    <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters mb-3" [formGroup]="addGroupForm" (ngSubmit)="addAccGroup()" novalidate>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+            <div class="col-sm-6 px-2 pt-2">
+              <label>Account Code</label>
+              <input type="text" placeholder="Enter Account Code" formControlName="code" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.code.errors }">
+              <div *ngIf="submitted && fc.code.errors" class="invalid-feedback">
+                <div *ngIf="fc.code.errors.required">Enter Code.</div>
+              </div>
+            </div>
+            <div class="col-sm-6 px-2 pt-2 float-left">
+              <label>Account Type</label>
+              <select class="custom-select" formControlName="accTypeId" (change)="setType($event)" [ngClass]="{ 'is-invalid': submitted && fc.accTypeId.errors }">
+                  <option selected disabled value=null>--Select Account Type--</option>
+                  <option *ngFor="let acc of accTypes" value={{acc.id}}>{{acc.name}}</option>
+              </select>
+              <div *ngIf="submitted && fc.accTypeId.errors" class="invalid-feedback">
+                <div *ngIf="fc.accTypeId.errors.required">Enter Account Type.</div>
+              </div>
+            </div>
+            <div class="col-sm-6 px-2 pt-2">
+              <label>Account Name</label>
+              <input type="text" placeholder="Enter Account Name" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.name.errors }">
+              <div *ngIf="submitted && fc.name.errors" class="invalid-feedback">
+                <div *ngIf="fc.name.errors.required">Enter name.</div>
+              </div>
+              
+            </div>
+            <div class="col-sm-6 px-2 pt-2">
+              <label>Arabic Name</label>
+              <input type="text" placeholder="Enter Arabic Name" formControlName="arabicName" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-12 mt-3">
+            <button type="submit" class="gx-btn btn-success gx-btn-sm text-white">Save</button>
+            <!-- <a href="javascript:void(0)" class="gx-btn btn-danger gx-btn-sm text-white">Edit</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-cyan gx-btn-sm text-white">Fields</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-cyan gx-btn-sm text-white">Copy</a> -->
+         </div>
+        </form>
+</div>
+<div class="modal-footer">
+</div>
+
+
+
+

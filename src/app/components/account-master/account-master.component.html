@@ -1,0 +1,90 @@
+<div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+  <h2 class="title mb-3 mb-sm-0">List Accounts Master</h2>
+  <nav class="mb-0 breadcrumb">
+    <span class="active breadcrumb-item">Accounts Master</span>
+      <span class="active breadcrumb-item">List</span>
+  </nav>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+    <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+    <div class="form-group col-sm-12 px-2 pl-0 text-right">
+      <form [formGroup]="searchForm" (ngSubmit)="search()" class="row" novalidate >
+      <div class="col-sm-3">
+        <label class="lable f-l">Name</label>
+        <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+      </div>
+      <div class="col-sm-2">
+          <label class="lable f-l">Code</label>
+          <input type="text" placeholder="Enter Code" class="form-control" formControlName="code">
+      </div>
+      <div class="col-sm-3">
+          <div class="col-lg-12">
+              <label class="mb-2" style="margin-right: 175px">Category</label>
+              <div class="clearfix form-inline">
+                  <div class="radio radio-inline radio-replace">
+                      <input type="radio" name="category" id="radioInput1" value="Y" formControlName="category">
+                      <label for="radioInput1">Yes</label>
+                  </div>
+                  <div class="radio radio-inline radio-replace">
+                      <input type="radio" name="category" id="radioInput2" value="N" formControlName="category">
+                      <label for="radioInput2">No</label>
+                  </div>
+                  <div class="radio radio-inline radio-replace">
+                      <input type="radio" name="category" id="radioInput3" value="" formControlName="category">
+                      <label for="radioInput3">All</label>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-3">
+          <button class="gx-btn gx-btn-light-green gx-btn-sm mt-new mb-0 btn-top" ><i class="zmdi zmdi-search"></i></button>
+          <a (click)="clear()" class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Clear</a>
+          <a *ngxPermissionsOnly="['accounts-list-create']" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top" routerLink="/accounts/new">New</a>
+          <a *ngxPermissionsOnly="['accounts-list-edit']" (click)="edit()" class="gx-btn gx-btn-light-green gx-btn-sm mt-new mb-0 btn-top text-white">Edit</a>
+      </div>
+      </form>
+    </div>
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                  <thead>
+                  <tr role="row">
+                      <th tabindex="0" rowspan="1" colspan="1">S.No</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Account Group</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Account Name</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Account Code</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Is Category</th>
+                      <!-- <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">TRN Number</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Country</th> -->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr class="gradeA odd" role="row" *ngFor="let item of list">
+                    <td class="sorting_1 text-center">
+                      <input name="checkbox" [checked]="item.checked" class="m-table-checkbox form-check-input frm-checkbox" type="checkbox" (change)="toggeleItem($event,item)">
+                    </td>
+                      <td>{{item.accmst.name}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.code}}</td>
+                      <td>{{item.category}}</td>
+                      <!-- <td>NA</td>
+                      <td>NA</td> -->
+                  </tr>
+                  </tbody>
+              </table>
+              <div class="gx-card-footer">
+                <nav aria-label="navigation">
+                    <ul class="pagination">
+                        <ngb-pagination [collectionSize]="totalCount" [(page)]="listSpec.page" [(pageSize)]="listSpec.size"
+                            size="sm" [maxSize]="10" [boundaryLinks]="true" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                    </ul>
+                </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

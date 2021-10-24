@@ -1,0 +1,96 @@
+<div class="gx-wrapper mar-0">
+  <div class="dashboard animated slideInUpTiny animation-duration-3">
+    <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Journal Voucher</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters" [formGroup]="searchForm" (ngSubmit)="search()" novalidate>
+        <div class="form-group col-sm-3 px-2">
+          <label for="voucherNo">Search By Journal Voucher No</label>
+          <input type="text" class="form-control"  placeholder="Enter Journal Voucher No" formControlName="jvno">
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label for="accountType">Account Type</label>
+          <select class="form-control" formControlName="accounttype">
+            <option selected disabled value="">--Select Account Type--</option>
+            <option value="">All</option>
+            <option>Customer</option>
+            <option>Vendor</option>
+            <option>Bank</option>
+            
+        </select>
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label for="accountName">Account Name</label>
+          <input type="text" class="form-control"  placeholder="Enter Account Name" formControlName="contactname">
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label>SEARCH BY STATUS</label>
+          <select class="form-control" formControlName="status">
+              <option selected disabled value="">--Select Status--</option>
+              <option value="">All</option>
+              <option value = "Saved" >Saved</option>
+              <option value = "Authorized" >Authorized</option>
+              <option value = "Pending_Approval_by_Manager" >Pending Approval by Manager</option>
+              <option value = "Pending_Approval_by_Director" >Pending Approval by Director</option>
+              <option value = "Unauthorized_by_Manager" >Unauthorized by Manager</option>
+              <option value = "Unauthorized_by_Director" >Unauthorized by Director</option>
+          </select>
+      </div>
+        <div class="col-sm-12 mt-3 text-right">
+          <button type="submit" class="gx-btn gx-btn-light-green gx-btn-sm"><i class="zmdi zmdi-search"></i></button>
+            <a (click)="clearSearch()" class="gx-btn btn-danger gx-btn-sm">Reset</a>
+            <a *ngxPermissionsOnly="['journal entries-voucher-create']" routerLink="/journal/new/voucher" class="gx-btn btn-success gx-btn-sm">New</a>
+            <a *ngxPermissionsOnly="['journal entries-voucher-edit']" (click)="edit()"  class="gx-btn gx-btn-light-green gx-btn-sm text-white">Edit</a>
+            <!-- <a href="javascript:void(0)" class="gx-btn btn-danger gx-btn-sm">Export</a> -->
+        </div>
+      </form>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+            aria-describedby="DataTables_Table_0_info" role="grid">
+            <thead>
+              <tr role="row">
+                <th tabindex="0" rowspan="1" colspan="1" class="text-center" >#</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Date</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Journal Voucher No</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Account Type</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Account Name</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Type</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Amount</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeA odd" role="row" *ngFor="let vouch of journalVouchers">
+                  <td class="sorting_1 text-center">
+                      <input name="checkbox" [checked]="vouch.checked" (change)="toggeleItem($event,vouch)" class="m-table-checkbox form-check-input frm-checkbox"
+                          type="checkbox">
+                  </td>
+                <td>{{vouch.jvdate | date:'dd-MM-yyyy'}}</td>
+                <td>{{vouch.jvno}}</td>
+                <td>{{vouch.faccounttype}}</td>
+                <td>{{vouch.contactname}}</td>
+                <td>{{vouch.ftype}}</td>
+                <td>{{vouch.famount | number:'1.0-2'}}</td>
+                <td>{{vouch.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="gx-card-footer">
+        <nav aria-label="navigation">
+            <ul class="pagination">
+                <ngb-pagination [collectionSize]="totalCount" [(page)]="jvSpecDto.page"
+                    [(pageSize)]="jvSpecDto.size" [maxSize]="10" [boundaryLinks]="true" size="sm" (pageChange)="pageChange($event)"></ngb-pagination>
+            </ul>
+        </nav>
+    </div>
+    </div>
+  </div>
+</div>

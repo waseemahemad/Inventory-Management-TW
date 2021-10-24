@@ -1,0 +1,35 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.gx-toolbar{
+    background-color: #716aca;
+    left: 0 !important;
+    border-bottom:5px solid #fe967a;
+}
+
+.close-icon{
+    padding-right: 0;
+    display: inline !important;
+}
+.close-icon:hover{
+background: none !important;
+}
+
+.prop{
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    margin-right: 10px;
+    border: 1px solid transparent;
+}
+.remo{
+    color: blue;
+    cursor: pointer;
+    font-size: 12px;
+}
+ .alertsContainer{
+     margin-top: 50px !important;
+ }
+
+ 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

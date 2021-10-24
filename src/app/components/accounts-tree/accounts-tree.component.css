@@ -1,0 +1,41 @@
+.example-tree-progress-bar {
+  margin-left: 30px;
+}
+
+.dn{
+  display: none;
+}
+.mrTop{
+  margin-top: 10px;
+}
+ul{
+  list-style:none;
+}
+.zmdi-chevron-right{
+  margin-right: 5px;
+  color: #fe967a;
+}
+
+.i-icon{
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.i-icon:hover{
+  text-decoration: none;
+}
+.rotate{
+  -moz-transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+}
+
+.rotate.down{
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  transform:rotate(90deg);
+}
+
+ul li{
+  list-style: none;
+}

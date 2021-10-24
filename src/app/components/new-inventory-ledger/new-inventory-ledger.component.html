@@ -1,0 +1,74 @@
+<div class="gx-wrapper mar-0">
+    <div class="dashboard animated slideInUpTiny animation-duration-3">
+      <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+        <h2 class="title mb-3 mb-sm-0">Stock Ledger</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="gx-card">
+        <div class="gx-card-body">
+            <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters">
+          <div class="form-group col-sm-4 px-2">
+            <label for="voucherNo">VOUCHER NO</label>
+            <input type="text" class="form-control"  placeholder="Enter Voucher No">
+          </div>
+          <div class="form-group col-12 col-sm-4 px-2">
+            <label for="date">DATE</label>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="input-group">
+                    <input formControlName="grndate" placeholder="DD-MM-YYYY" name="grndate" id="grndate" ngbDatepicker #d="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.grndate.errors }" >                      
+                    <div class="input-group-append">
+                      <button class="btn btn-primary-secondary" (click)="d.toggle()" type="button">
+                        <img src="../../../assets/images/icons/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                      </button>
+                    </div>
+                    <div *ngIf="submitted && fc.grndate.errors" class="invalid-feedback">
+                      <div *ngIf="fc.grndate.errors.required">Delivery Date Required.</div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <div class="form-group col-sm-4 px-2">
+            <label for="cutomer">CUTOMER NAME</label>
+            <input type="text" class="form-control"  placeholder="Enter Customer  name">
+          </div>
+          <div class="form-group col-sm-12 col-md-6 col-lg-3 col-xl-2">
+            <a href="javascript:void(0)" class="gx-btn gx-btn-deep-orange mt-10">Add Customer </a>
+          </div>
+          <div class="form-group col-sm-12 col-md-6 col-lg-3 col-xl-2 px-2">
+            <label for="link">LINK</label>
+            <select class="custom-select">
+              <option selected="">Open this select menu</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+              <option value="3">Option 4</option>
+              <option value="3">Option 5</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-4 px-4">
+            <label for="narration">NARROTION</label>
+            <input type="text" class="form-control"  placeholder="Enter Scope / Reference">
+          </div>
+          <div class="form-group col-sm-4 px-2">
+            <label for="lpoNo">LPO NO.</label>
+            <input type="text" class="form-control"  placeholder="Enter LPO No">
+          </div>
+          <div class="form-group col-sm-4 px-2">
+            <label for="paymentTerm">PAYMENT TERM</label>
+            <input type="text" class="form-control"  placeholder="Enter Payment Term">
+          </div>
+          <div class="col-12 col-sm-12 text-right">
+            <a href="javascript:void(0)" class="gx-btn btn-success gx-btn-sm">SAVE</a>
+            <a href="javascript:void(0)" class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-cyan gx-btn-sm">PRINT</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-red gx-btn-sm">DELETE</a>
+            <a href="javascript:void(0)" class="gx-btn btn-success gx-btn-sm">NEW VOUCHER</a>
+          </div>
+          </form> 
+        </div>
+      </div>
+    </div>
+  </div>

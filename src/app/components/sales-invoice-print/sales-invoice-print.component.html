@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Express Computers LLC</title>
+</head>
+<style>
+  body {
+    font-family: arial;
+    overflow: scroll;
+  }
+
+  .main .banner {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 150px;
+    border: 1px solid #000;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  table {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 0;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+  }
+
+  .head1 {
+    font-size: 30px;
+  }
+
+  th,
+  td {
+    border: 1px solid #000;
+    padding: 5px 0 5px 5px;
+  }
+
+  .second-1 {
+    margin-top: 20px;
+    min-height: auto;
+  }
+
+  .second-1 th {
+    padding: 10px 0 10px 0;
+  }
+
+  .second-1 td {
+    text-align: center;
+    height: 35px;
+  }
+
+  .second-1 tfoot {
+    top: 10px;
+  }
+
+  .third-1 th {
+    padding-left: 10px;
+  }
+
+  .third-1 {
+    border: none;
+  }
+</style>
+
+<body>
+  <div class="main">
+    <div class="banner">
+      <img src="../../../assets/images/printheader.jpg" title="" class="">
+    </div>
+
+    <table cellspacing="0" class="first-1">
+      <thead>
+        <th colspan="6" style="text-align: center">TAX INVOICE</th>
+      </thead>
+      <tr style="padding-left: 10px; font-weight: bold;">
+        <td colspan="1" style="border: none; width: 25%;">Account Code</td>
+        <td colspan="1" style="border: none; width: 25%;">: C1020</td>
+        <td style="border: none; width: 25%;">Inv No</td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000; width: 25%;">: {{salesDto.saleno}} </td>
+      </tr>
+      <tr style="padding-left: 10px; font-weight: bold;">
+        <td style="border: none;">Customer Name</td>
+        <td style="border: none;">: {{contacts.displayName}} </td>
+        <td style="border: none;">Date</td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000;">: {{salesDto.saledate | date:'dd-MM-yyyy'}} </td>
+      </tr>
+      <tr style="padding-left: 10px; font-weight: bold;">
+        <td style="border: none;">Vat TRN</td>
+        <td style="border: none;">: {{contacts.trnno}} </td>
+        <td style="border: none;">DO Ref</td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000;">: {{salesDto.deliveryNote.deliveryNo}} </td>
+      </tr>
+      <tr style="padding-left: 10px; font-weight: bold;">
+        <td style="border: none;">Phone</td>
+        <td style="border: none;">: {{contacts.phone}} </td>
+        <td style="border: none;">SalesMan </td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000;">: {{user.name}} </td>
+      </tr>
+      <tr style="padding-left: 10px; font-weight: bold; border: none;">
+        <td style="border: none;">Fax</td>
+        <td style="border: none;">: {{contacts.faxNo}} </td>
+        <td style="border: none;">Mobile No </td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000;">: </td>
+      </tr>
+      <tr style="padding-left: 10px; font-weight: bold;">
+        <td style="border: none;">Email </td>
+        <td style="border: none;">: {{contacts.email}} </td>
+        <td style="border: none;">Vat TRN</td>
+        <td style="border-left:0;border-bottom: 0px; border-top:0px;border-right: 1px solid #000;">: {{trnNo}} </td>
+      </tr>
+    </table>
+    <table cellspacing="0">
+      <thead>
+        <th style="padding-top: 10px; padding-bottom: 10px;">Payment Terms</th>
+        <th style="padding-top: 10px; padding-bottom: 10px;">Warranty</th>
+        <th colspan="2" style="padding-top: 15px; padding-bottom: 15px;">Customer PONo</th>
+      </thead>
+      <tbody>
+        <tr style="text-align: center">
+          <td style="padding-top: 10px; padding-bottom: 10px;">{{salesDto.paymentTerms}}</td>
+          <td style="padding-top: 10px; padding-bottom: 10px;">{{salesDto.warranty}}</td>
+          <td colspan="2" style="padding-top: 15px; padding-bottom: 15px;"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table cellspacing="0" class="second-1">
+      <thead>
+        <th style="width: 8%; text-align: center">S.No</th>
+        <th style="width: 8%; text-align: center">Part No</th>
+        <th colspan="4" style="text-align: center">Description</th>
+        <th style="width: 8%; text-align: center">UOM</th>
+        <th style="width: 8%; text-align: center">Qty</th>
+        <th style="width: 8%; text-align: center">Price(AED)</th>
+        <th style="width: 10%; text-align: center">Amount</th>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let s of salesDto.saleItem; index as i">
+          <td  style="text-align: center" >{{i + 1}}</td>
+          <td style="width: 8%; text-align: center">{{s.item.sku}}</td>
+          <td colspan="4"  style="text-align: center">{{s.item.name}}</td>
+          <td style="width: 8%; text-align: center" >{{s.item.uom}}</td>
+          <td style="width: 8%; text-align: center">{{s.qty}}</td>
+          <td style="width: 8%; text-align: center">{{s.unitPrice}}</td>
+          <td style="width: 10%; text-align: center">{{s.amount}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" style=" font-weight: bold">Amount in words</td>
+          <td colspan="5" style=" font-weight: bold">{{amount}} Dirham Only</td>
+          <td colspan="2" style="text-align: left; font-weight: bold">
+            Sub Total
+          </td>
+          <td colspan="2" style=" font-weight: bold">{{salesDto.grossAmt}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none"></td>
+            <td colspan="5" style="border: none"></td>
+          <td colspan="2" style="text-align: left; font-weight: bold">Discount</td>
+          <td colspan="2" style=" font-weight: bold">{{salesDto.discount}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none"></td>
+            <td colspan="5" style="border: none"></td>
+          <td colspan="2" style="text-align: left; font-weight: bold">Vat@ 5%</td>
+          <td colspan="2" style=" font-weight: bold">{{salesDto.vat}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none"></td>
+            <td colspan="5" style="border: none"></td>
+          <td colspan="2" style="text-align: left; font-weight: bold"> Grand Totoal</td>
+          <td colspan="2" style=" font-weight: bold">{{salesDto.netAmt}}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <table cellspacing="0" class="third-1">
+      <tfoot style="text-align: left;">
+        
+        <tr>
+          <th colspan="4" style="border-top:0px solid #000; border-right: 0px solid #000; border-bottom: 0px;">Terms and Conditions</th>
+          <th colspan="2" style="border-top:0px solid #000; border-left: 0px; border-bottom: 0; border-right: 1px solid #000; padding-top: 15px; padding-bottom: 15px;"></th>
+        </tr>
+        <tr>
+          <th colspan="4" style="border-top:0px solid #000; border-right: 0px solid #000; border-bottom: 0px;">1.Customer is billed after indicating acceptance of the quote</th>
+          <th colspan="2" style="border-top:0px solid #000; border-left: 0px; border-bottom: 0; border-right: 1px solid #000; padding-top: 15px; padding-bottom: 15px;"></th>
+        </tr>
+        <tr>
+          <th colspan="4" style="border-top:0px solid #000; border-right: 0px solid #000; border-bottom: 0px;">2.Original Invoice should be produced for warranty claims.</th>
+          <th colspan="2" style="border-top:0px solid #000; border-left: 0px; border-bottom: 0; border-right: 1px solid #000; padding-top: 15px; padding-bottom: 15px;"></th>
+        </tr>
+        <tr>
+          <th colspan="4" style="border-top:0px solid #000; border-right: 0px solid #000; border-bottom: 0;">
+            3.Goods once sold will not be taken back and refund claim will not be entertained</th>
+          <th colspan="2" style="border-top:0px solid #000; border-left: 0px; border-bottom: 0; border-right: 1px solid #000; padding-top: 15px; padding-bottom: 15px;"></th>
+        </tr>
+        <tr>
+          <th style="border-top:0px solid #000; border-right: 0px solid #000; padding-top: 15px; padding-bottom: 15px;" colspan="4">
+            Prepared By
+            <br> For Express Computers LLC
+          </th>
+          <th colspan="2" style="border-top:0px solid #000; border-left: 0px; border-right: 1px solid #000; padding-top: 15px; padding-bottom: 15px;">Customer Signature</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</body>
+
+</html>

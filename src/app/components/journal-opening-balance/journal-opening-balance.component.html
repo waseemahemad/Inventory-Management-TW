@@ -1,0 +1,97 @@
+<div class="gx-wrapper mar-0">
+  <div class="dashboard animated slideInUpTiny animation-duration-3">
+    <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Opening Balance</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters" [formGroup]="searchForm" (ngSubmit)="search()" novalidate>
+        <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters">
+          <div class="form-group col-sm-3 px-2">
+          <label for="voucherNo">Search By Opening Balance No</label>
+          <input type="text" class="form-control"  placeholder="Enter Opening Balance No" formControlName="openingno" >
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label for="accountType">Account Type</label>
+          <select class="form-control" formControlName="accounttype" >
+            <option selected disabled value="">--Select Account Type--</option>
+            <option value="">All</option>
+            <option>Customer</option>
+            <option>Vendor</option>
+            <option>Bank</option>
+        </select>
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label for="accountName">Account Name</label>
+          <input type="text" class="form-control"  placeholder="Enter Account Name" formControlName="accountname">
+        </div>
+        <div class="form-group col-sm-3 px-2">
+          <label>SEARCH BY STATUS</label>
+          <select class="form-control" formControlName="status">
+              <option selected disabled value="">--Select Status--</option>
+              <option value="">All</option>
+              <option value = "Saved" >Saved</option>
+              <option value = "Authorized" >Authorized</option>
+              <option value = "Pending_Approval_by_Manager" >Pending Approval by Manager</option>
+              <option value = "Pending_Approval_by_Director" >Pending Approval by Director</option>
+              <option value = "Unauthorized_by_Manager" >Unauthorized by Manager</option>
+              <option value = "Unauthorized_by_Director" >Unauthorized by Director</option>
+          </select>
+      </div>
+        <div class="col-sm-12 my-2 text-right">
+            <button class="gx-btn gx-btn-light-green gx-btn-sm"><i class="zmdi zmdi-search"></i></button>
+            <a (click)="clearSearch()" class="gx-btn btn-danger gx-btn-sm text-white">Reset</a>
+            <a *ngxPermissionsOnly="['journal entries-opening balance-create']" routerLink="/journal/new/opening-balance" class="gx-btn btn-success gx-btn-sm">New</a>
+            <a *ngxPermissionsOnly="['journal entries-opening balance-edit']" (click)="edit()"  class="gx-btn gx-btn-light-green gx-btn-sm text-white">Edit</a>
+            <!-- <a href="javascript:void(0)" class="gx-btn btn-danger gx-btn-sm">Export</a> -->
+        </div>
+        </div>
+      </form>
+      </div>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+            aria-describedby="DataTables_Table_0_info" role="grid">
+            <thead>
+              <tr role="row">
+                <th tabindex="0" rowspan="1" colspan="1" class="text-center" >#</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Date</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Opening Balance No</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Account Type</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Account Name</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Type</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Amount</th>
+                <th tabindex="0" rowspan="1" colspan="1" >Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="gradeA odd" role="row" *ngFor="let item of list">
+                <td class="sorting_1 text-center">
+                    <input name="checkbox" [checked]="item.checked" (change)="toggeleItem($event,item)" class="m-table-checkbox form-check-input frm-checkbox"
+                        type="checkbox">
+                </td>
+                <td>{{item.openingdate | date:'dd-MM-yyyy'}}</td>
+                <td>{{item.openingno}}</td>
+                <td>{{item.accounttype}}</td>
+                <td>{{item.accountname}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.amount}}</td>
+                <td>{{item.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="gx-card-footer">
+        <nav aria-label="navigation">
+            <ul class="pagination">
+                <ngb-pagination [collectionSize]="totalCount" [(page)]="spec.page"
+                    [(pageSize)]="spec.size" [maxSize]="10" [boundaryLinks]="true" size="sm" (pageChange)="pageChange($event)"></ngb-pagination>
+            </ul>
+        </nav>
+    </div>
+    </div>
+  </div>

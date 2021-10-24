@@ -1,0 +1,27 @@
+.sp-1{
+    border: 1px solid #333;
+    border-radius: 3px;
+    display: inherit;
+    height: 120px;
+    overflow: scroll;
+    padding: 15px;
+}
+
+.sp-1 ul{
+    list-style: none;
+    display: inline;
+    margin: -40px;
+}
+.sp-1 ul li{
+    background-color:#6db33f;
+    color: #fff;
+    margin: 8px;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.sp-1 .icon{
+    padding-right: 5px;
+    color: red;
+}

@@ -1,0 +1,91 @@
+<div class="gx-wrapper mar-0">
+    <div class="dashboard animated slideInUpTiny animation-duration-3">
+      <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+        <h2 class="title mb-3 mb-sm-0">Debit Note</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="gx-card">
+        <div class="gx-card-body">
+            <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters">
+          <div class="form-group col-sm-4 px-2">
+            <label for="voucherNo">VOUCHER NO</label>
+            <input type="text" class="form-control"  placeholder="Enter Voucher No">
+          </div>
+          <div class="form-group col-12 col-sm-4 px-2">
+            <label for="date">DATE</label>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="input-group">
+                    <input formControlName="grndate" placeholder="DD-MM-YYYY" name="grndate" id="grndate" ngbDatepicker #d="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && fc.grndate.errors }" >                      
+                    <div class="input-group-append">
+                      <button class="btn btn-primary-secondary" (click)="d.toggle()" type="button">
+                        <img src="../../../assets/images/icons/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                      </button>
+                    </div>
+                    <div *ngIf="submitted && fc.grndate.errors" class="invalid-feedback">
+                      <div *ngIf="fc.grndate.errors.required">Delivery Date Required.</div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+              aria-describedby="DataTables_Table_0_info" role="grid">
+              <thead>
+                <tr role="row">
+                  <th tabindex="0" rowspan="1" colspan="1" style="width: 192px;">S.No</th>
+                  <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Account Name</th>
+                  <th tabindex="0" rowspan="1" colspan="1" style="width: 242px;">Type</th>
+                  <th tabindex="0" rowspan="1" colspan="1" style="width: 165px;">Narration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="gradeA odd" role="row">
+                  <td class="sorting_1">NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+                <tr class="gradeA odd" role="row">
+                  <td class="sorting_1">NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                  <td>NA</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th rowspan="1" colspan="2"></th>
+                  <th rowspan="1" colspan="1">0.00</th>
+                  <th rowspan="1" colspan="1">0.00</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+              aria-describedby="DataTables_Table_0_info" role="grid">
+              <tbody>
+                <tr class="gradeA odd" role="row">
+                  <td class="sorting_1">Balance Amount</td>
+                  <td>Net = 0.00</td>
+                  <td>Clr = 0.00</td>
+                  <td>Bal = 0.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12 col-sm-12 text-right">
+            <a href="javascript:void(0)" class="gx-btn btn-success gx-btn-sm">SAVE</a>
+            <a href="javascript:void(0)" class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-cyan gx-btn-sm">PRINT</a>
+            <a href="javascript:void(0)" class="gx-btn gx-btn-red gx-btn-sm">DELETE</a>
+            <a href="javascript:void(0)" class="gx-btn btn-success gx-btn-sm">NEW VOUCHER</a>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

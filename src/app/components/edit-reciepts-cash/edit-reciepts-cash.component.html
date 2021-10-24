@@ -1,0 +1,144 @@
+<div class="gx-wrapper mar-0">
+  <div class="dashboard animated slideInUpTiny animation-duration-3">
+    <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+      <h2 class="title mb-3 mb-sm-0">Cash Receipt > Edit</h2>
+      <div class="form-group col-sm-6 text-right mb-0">
+        <a routerLink="/reciepts/cash" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="gx-card">
+      <div class="gx-card-body">
+        <form [formGroup]="cashReceiptForm" (ngSubmit)="submit()" novalidate >
+          <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0">
+          <div class="row col-sm-12">
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label for="voucherNo">VOUCHER NO</label>
+            <input type="text" formControlName="receiptNo" class="form-control"  placeholder="Enter Voucher No" [ngClass]="{ 'is-invalid': submitted && f.receiptNo.errors }" readonly>
+            <div *ngIf="submitted && f.receiptNo.errors" class="invalid-feedback">
+              <div *ngIf="f.receiptNo.errors.required">Voucher No Required.</div>
+            </div>
+          </div>
+          <!-- <div class="form-group col-sm-3 px-2">
+            <label for="date">DATE</label>
+            <div class="input-group">
+                <input formControlName="receiptDate" placeholder="DD-MM-YYYY" ngbDatepicker #d="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.receiptDate.errors }" [readonly]="isReadOnly">
+                <div class="input-group-append">
+                  <button class="btn btn-primary-secondary" (click)="d.toggle()" type="button">
+                    <img src="../../../assets/images/icons/calendar-icon.svg" style="width: 1rem; height: 1.5rem; cursor: pointer;" />
+                  </button>
+                </div>
+                <div *ngIf="submitted && f.receiptDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.receiptDate.errors.required">Receipt Date Required.</div>
+                </div>
+              </div>
+        </div> -->
+        <div class="form-group col-sm-3 px-2">
+          <label for="date">DATE</label>
+            <div class="input-group">
+                <input formControlName="receiptDate" placeholder="DD-MM-YYYY"  type="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.receiptDate.errors }" [readonly]="isReadOnly" >                      
+                <div class="input-group-append">
+                </div>
+                <div *ngIf="submitted && f.receiptDate.errors" class="invalid-feedback">
+                  <div *ngIf="f.receiptDate.errors.required">Receipt Date Required.</div>
+                </div>
+            </div>
+      </div>
+        <div class="form-group col-sm-3 px-2 pl-0">
+          <label for="voucherNo">Account Type</label>
+          <select class="form-control" formControlName="accounttype" (change)="onTypeSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.accounttype.errors }">
+              <option selected disabled value="">--Select Account Type--</option>
+              <option>Accounts</option>
+              <option>Customer</option>
+          </select>
+          <div *ngIf="submitted && f.accounttype.errors" class="invalid-feedback">
+            <div *ngIf="f.accounttype.errors.required">Account Type Required.</div>
+          </div>
+        </div>
+        <div *ngIf="customerSelected" class="form-group col-sm-3 px-2 pl-0">
+          <label for="voucherNo">Customer Name</label>
+          <input type="text" formControlName="contactName" (selectItem)="selectedCustomer($event)" [ngbTypeahead]="searchCustomer" class="form-control"  placeholder="Enter Customer Name" [ngClass]="{ 'is-invalid': submitted && customerSelected && (f.contactName.value ==='' || f.contactName.value === null || f.contactName.value === undefined) }">
+          <input type="hidden" formControlName="contactId"  class="form-control" >
+          <div *ngIf="submitted && customerSelected && (f.contactName.value ==='' || f.contactName.value === null || f.contactName.value === undefined)" class="invalid-feedback">
+            Customer Name Required.
+          </div>
+        </div>
+        <div *ngIf="accountsSelected" class="form-group col-sm-3 px-2 pl-0">
+          <label for="voucherNo">Accounts</label>
+          <input type="text" formControlName="accountName" (selectItem)="selectedAccount($event)" [ngbTypeahead]="searchAccount" class="form-control"  placeholder="Enter Account Name" [ngClass]="{ 'is-invalid': submitted && accountsSelected && (f.accountName.value ==='' || f.accountName.value === null || f.accountName.value === undefined) }">
+          <input type="hidden" formControlName="accountId"  class="form-control" >
+          <div *ngIf="submitted && accountsSelected && (f.accountName.value ==='' || f.accountName.value === null || f.accountName.value === undefined)" class="invalid-feedback">
+            Account Name Required.
+          </div>
+        </div>
+    </div>
+    <div class="row col-sm-12">
+    <div class="form-group col-sm-3 px-2 pl-0">
+      <label>Payment Mode</label>
+      <select formControlName="paymentMode" class="custom-select" [ngClass]="{ 'is-invalid': submitted && f.paymentMode.errors }">
+        <option selected disabled value="">--Select Payment Mode--</option>
+        <option>Counter Cash</option>
+        <option>Main Cash</option>
+        <option>Petty Cash</option>
+        <option>Floating Cash</option>
+      </select>
+      <div *ngIf="submitted && f.paymentMode.errors" class="invalid-feedback">
+        <div *ngIf="f.paymentMode.errors.required">Payment Mode Required.</div>
+      </div>
+    </div>
+        <div class="form-group col-sm-3 px-2">
+          <label>Amount</label>
+          <input type="number" formControlName="amount" class="form-control" placeholder="Enter Amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+          <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+            <div *ngIf="f.amount.errors.required">Amount Required.</div>
+          </div>
+        </div>
+        <div *ngIf="customerSelected" class="form-group col-sm-3 px-2">
+          <label>Total Amount</label>
+          <input type="text" formControlName="totalamount"  class="form-control" placeholder="Calculated Amount" readonly value="{{totalAmounts | number:'1.0-2'}}">
+        </div>
+    </div>
+          <div *ngIf="customerSelected" class="table-responsive">
+              <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                  <thead>
+                  <tr role="row">
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Invoice No.</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Invoice Date</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Adjustment Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Balance</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Paid Amount</th>
+                      <th tabindex="0" rowspan="1" colspan="1" style="width: 208px;">Total Amount</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let sale of receiptSlaveDto; index as i" class="gradeA odd" role="row">
+                            <td>{{sale.saleno}}</td>
+                            <td>{{sale.saledate  | date:'dd-MM-yyyy'}}</td>
+                            <td>
+                              <input type="number" [(ngModel)]="sale.adjustmentAmt" name="adjustmentAmt" [ngModelOptions]="{standalone: true}" (keyup)="changeBalance($event,sale)" placeholder="Enter Adjustment Amounts"  class="form-control">
+                            </td>
+                            <td>{{sale.remainingAmt | number:'1.0-2'}}</td>
+                            <td>{{sale.balance | number:'1.0-2'}}</td>
+                            <td>{{sale.paidAmt | number:'1.0-2'}}</td>
+                           <td>{{sale.amount | number:'1.0-2'}}</td>
+                        </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="col-12 col-sm-12 text-right">
+              <button type="submit" class="gx-btn btn-success gx-btn-sm">SAVE</button>
+              <a *ngxPermissionsOnly="['receipts-cash-authorize']" (click)="authorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">AUTHORIZE</a>
+              <a *ngxPermissionsOnly="['receipts-cash-unAuthorize']"  (click)="unauthorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">UN-AUTHORIZE</a>
+              <a routerLink="/reciepts/cash" class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+              <!-- <a (click)="reset()" class="gx-btn gx-btn-red gx-btn-sm">RESET</a> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

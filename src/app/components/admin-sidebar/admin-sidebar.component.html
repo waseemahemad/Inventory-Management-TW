@@ -1,0 +1,58 @@
+<div id="menu" class="side-nav gx-sidebar">
+  <div class="navbar-expand-lg">
+      <div id="main-menu" class="main-menu navbar-collapse collapse">
+          <ul class="nav-menu">
+              <li class="nav-header">Admin Panel | FinXpress</li>
+              <li class="menu" [ngClass]="{'open' : users}" (click)="closeTab('users')">
+                  <a href="javascript:void(0)" (click)="users = !users" >
+                    <i class="zmdi zmdi-account"></i>
+                      <span class="nav-text">Users</span>
+                  </a>
+                  <ul class="sub-menu">
+                      <li><a routerLink="/create/user" ><span class="nav-text">Create Users</span></a></li>
+                      <li><a routerLink="/list/user"><span class="nav-text">List Users</span></a></li>
+                  </ul>
+              </li>          
+              <li class="menu" [ngClass]="{'open' : organizations}" (click)="closeTab('organizations')">
+                  <a href="javascript:void(0)" (click)="organizations = !organizations">
+                    <i class="zmdi zmdi-developer-board"></i>
+                      <span class="nav-text">Organizations</span>
+                  </a>
+                  <ul class="sub-menu">
+                      <!-- <li><a routerLink="/create/org" ><span class="nav-text">Create</span></a></li> -->
+                      <li><a routerLink="/edit/org"><span class="nav-text">Org</span></a></li>
+                  </ul>
+              </li>                         
+              <li class="menu" [ngClass]="{'open' : bank}" (click)="closeTab('bank')">
+                <a href="javascript:void(0)" (click)="bank = !bank" >
+                    <i class="zmdi zmdi-markunread-mailbox"></i>
+                    <span class="nav-text">Bank</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a routerLink="/new/bank" ><span class="nav-text">Create</span></a></li>
+                    <li><a routerLink="/list/bank"><span class="nav-text">List</span></a></li>
+                </ul>
+            </li>                         
+            <li class="menu" [ngClass]="{'open' : master}" (click)="closeTab('master')">
+              <a href="javascript:void(0)" (click)="master = !master" >
+                <i class="zmdi zmdi-view-compact"></i>
+                  <span class="nav-text">Modules Settings</span>
+              </a>
+              <ul class="sub-menu">
+                  <li><a routerLink="/admin/master" ><span class="nav-text">Master Module</span></a></li>
+                  <li><a routerLink="/admin/sub-master"><span class="nav-text">Master Sub Module</span></a></li>
+              </ul>
+          </li>                         
+          <li class="menu" [ngClass]="{'open' : uaccess}" (click)="closeTab('uaccess')">
+            <a href="javascript:void(0)" (click)="uaccess = !uaccess" >
+                <i class="zmdi zmdi-widgets"></i>
+                <span class="nav-text">User Access Settings</span>
+            </a>
+            <ul class="sub-menu">
+                <li><a routerLink="/admin/user-access" ><span class="nav-text">User Access</span></a></li>
+            </ul>
+        </li>         
+          </ul>
+      </div>
+  </div>
+</div>

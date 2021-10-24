@@ -1,0 +1,82 @@
+<div class="gx-main-content p-0">
+    <div class="gx-wrapper mar-0">
+        <div class="dashboard animated slideInUpTiny animation-duration-3">
+            <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h2 class="title mb-3 mb-sm-0">Contact List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="gx-card">
+                <div class="gx-card-body">
+                    <form [formGroup]="searchForm" (ngSubmit)="search()" novalidate >
+                        <div class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters pl-0">
+                        <div class="form-group col-sm-3 px-2">
+                            <select class="form-control" (change)="search()"  formControlName="contactType">
+                                <option value="" selected disabled>--Select Any One--</option>
+                                <option value="">All</option>
+                                <option value="Customer">Customer</option>
+                                <option value="Vendor">Vendor</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-3 px-2">
+                            <input type="text" class="form-control" placeholder="Search By Company Name" formControlName="name">
+                        </div>
+                        <div class="form-group col-sm-3 px-2">
+                            <button type="submit"  class="gx-btn gx-btn-light-green gx-btn-sm mt-new mb-0 btn-top"><i class="zmdi zmdi-search"></i></button>
+                            <a (click)="clearSearch()"  class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Reset</a>
+                            <!-- <a class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Edit</a> -->
+                        </div>
+                        <div class="form-group col-sm-3 px-2 text-right">
+                            <a *ngxPermissionsOnly="['contacts-list-create']" routerLink="/contacts/new" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">New</a>
+                            <!-- <a class="gx-btn btn-danger gx-btn-sm mt-new mb-0 btn-top">Edit</a> -->
+                            
+                        </div>
+                    </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0"
+                            aria-describedby="DataTables_Table_0_info" role="grid">
+                            <thead>
+                                <tr role="row">
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 52px; text-align: center;">#</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">Type</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">Account No</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 161px;">Name</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 261px;">Company Name</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 342px;">Email</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Work Phone</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">Address</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 248px;">TRN Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="gradeA odd" role="row" *ngFor="let con of listOfContacts">
+                                    <td *ngxPermissionsOnly="['contacts-list-edit']" class="sorting_1 text-center"><a (click)="edit(con.id)" class="gx-btn btn-warning gx-btn-sm mt-new mb-0 btn-top">edit</a></td>
+                                    <td *ngxPermissionsExcept="['contacts-list-edit']" class="sorting_1 text-center"></td>
+                                    <td>{{con.type}}</td>
+                                    <td>{{con.accno}}</td>
+                                    <td>{{con.firstName}}</td>
+                                    <td>{{con.companyName}}</td>
+                                    <td>{{con.email}}</td>
+                                    <td>{{con.phoneNo}}</td>
+                                    <td>{{con.address}}</td>
+                                    <td>{{con.trnNumber}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="gx-card-footer">
+                            <nav aria-label="navigation">
+                                <ul class="pagination">
+                                    <ngb-pagination [collectionSize]="totalCount" [(page)]="contactSpec.page" [(pageSize)]="contactSpec.size"
+                                    [maxSize]="10" [boundaryLinks]="true" size="sm" aria-label="Default pagination" (pageChange)="pageChange($event)"></ngb-pagination>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

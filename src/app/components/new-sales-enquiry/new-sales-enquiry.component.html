@@ -1,0 +1,226 @@
+ <div class="gx-wrapper mar-0">
+    <div class="dashboard animated slideInUpTiny animation-duration-3">
+      <div class="page-heading d-sm-flex justify-content-sm-between align-items-sm-center">
+        <h2 class="title mb-3 mb-sm-0">Sales Enquiry > New</h2>
+        <div class="form-group col-sm-6 text-right mb-0">
+          <a routerLink="/sales/enquiry" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="gx-card">
+        <div class="gx-card-body">
+          <form class="row col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 no-gutters p-0" [formGroup]="salesEnquiryForm" novalidate (ngSubmit)="createEnquiry()">
+            <div class="form-group col-sm-3 px-2 pl-0">
+              <label for="voucherNo">VOUCHER NO</label>
+              <input type="text" class="form-control" formControlName="enqNo" placeholder="Enter Voucher No" [ngClass]="{ 'is-invalid': submitted && f.enqNo.errors }" readonly>
+              <div *ngIf="submitted && f.enqNo.errors" class="invalid-feedback">
+                <div *ngIf="f.enqNo.errors.required">Voucher Number Is Required.</div>
+              </div>
+            </div>
+            <div class="form-group col-sm-3 px-2">
+              <label for="date">DATE</label>
+                <div class="input-group">
+                    <input formControlName="enqDate" placeholder="DD-MM-YYYY" name="podate" id="podate"  type="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.enqDate.errors }" [readonly]="isReadOnly">                      
+                    <div class="input-group-append">
+                    </div>
+                    <div *ngIf="submitted && f.enqDate.errors" class="invalid-feedback">
+                      <div *ngIf="f.enqDate.errors.required">Date Required.</div>
+                    </div>
+                </div>
+          </div>
+            <!-- <div class="form-group col-sm-3 px-2">
+              <label for="date">DATE</label>
+                <div class="input-group">
+                    <input formControlName="enqDate" placeholder="DD-MM-YYYY" name="podate" id="podate" ngbDatepicker #d="ngbDatepicker" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.enqDate.errors }" >                      
+                    <div class="input-group-append">
+                      <button class="btn btn-primary-secondary" (click)="d.toggle()" type="button">
+                        <img src="../../../assets/images/icons/calendar-icon.svg" style="width: 1rem; height: 1.5rem; cursor: pointer;"/>
+                      </button>
+                    </div>
+                    <div *ngIf="submitted && f.enqDate.errors" class="invalid-feedback">
+                      <div *ngIf="f.enqDate.errors.required">Date Required.</div>
+                    </div>
+                </div>
+          </div> -->
+          <div class="form-group col-sm-3 px-2">
+            <label for="cutomer">Customer NAME</label>
+            <input id="typeahead-basic" type="text" class="form-control"   placeholder="Enter Customer Name" formControlName="contactName" [ngbTypeahead]="customerNme" [ngClass]="{ 'is-invalid': submitted && f.contactName.errors}" />
+            <div *ngIf="submitted && f.contactName.errors" class="invalid-feedback">
+              <div *ngIf="f.contactName.errors.required">Customer Name Is Required.</div>
+            </div>
+            <input type="number" formControlName="contactId" hidden>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+              <a (click)="openFormModal()" class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top-24 mr-0">Add Customer </a>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="paymentTerm">PAYMENT TERM</label>
+            <input type="text" class="form-control" formControlName="paymentTerms" placeholder="Enter Payment Term" [ngClass]="{ 'is-invalid': submitted && f.paymentTerms.errors }" >
+            <div *ngIf="submitted && f.paymentTerms.errors" class="invalid-feedback">
+              <div *ngIf="f.paymentTerms.errors.required">Payment Term Is Required.</div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label>WARRANTY</label>
+            <input type="text" class="form-control" formControlName="warranty" placeholder="Enter Warranty">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label>AREA</label>
+            <input type="text" class="form-control" formControlName="area" placeholder="Enter Area" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" >
+            <div *ngIf="submitted && f.area.errors" class="invalid-feedback">
+              <div *ngIf="f.area.errors.required">Area Is Required.</div>
+            </div>
+          </div>
+          <div class="form-group col-sm-3 px-2 pl-0">
+            <label>SALESMAN</label>
+            <input id="typeahead-basic" type="text" class="form-control"  placeholder="Enter Salesman Name" formControlName="userName" [ngbTypeahead]="saleMan" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+              <div *ngIf="f.userName.errors.required">Salesman Name Is Required.</div>
+            </div>
+            <input type="number" formControlName="userId" hidden>
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label>SERVICE NO.</label>
+            <input type="text" class="form-control" formControlName="serviceNo" placeholder="Enter Service No.">
+          </div>
+          <div class="form-group col-sm-3 px-2">
+            <label for="narration">Scope / Reference</label>
+            <input type="text" class="form-control" formControlName="narration" placeholder="Enter Scope / Reference">
+          </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              <div class="col-sm-3 px-2 pt-2 float-left">
+                <label><strong class="font-size-15px">Product Details</strong></label>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+              
+                <div class="col-sm-2 px-2 pt-2 float-left">
+                    <label>Product Code</label>
+                    <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Code" formControlName="sku" [ngbTypeahead]="searchCode" [ngClass]="{ 'is-invalid': productSubmit && f.sku.value==='' }"/>
+                    <div *ngIf="productSubmit && f.sku.value==='' " class="invalid-feedback">
+                        Product Code Is Required
+                      </div>
+                    <input type="number" hidden class="form-control"  placeholder="Type product code" formControlName="itemId" />
+                  </div>
+                  <div class="col-sm-2 px-2 pt-2 float-left">
+                    <label>Product Name</label>
+                    <input id="typeahead-basic" type="text" class="form-control" (selectItem)="selectedProduct($event)" placeholder="Enter Product Name" formControlName="productName" [ngbTypeahead]="searchName" [ngClass]="{ 'is-invalid': productSubmit && f.productName.value==='' }"/>
+                    <div *ngIf="productSubmit && f.productName.value==='' " class="invalid-feedback">
+                        Product Name Is Required
+                      </div>
+                  </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Quantity</label>
+                  <input type="number" formControlName="qty" class="form-control no-spinners" placeholder="Enter Quantity" [ngClass]="{ 'is-invalid': productSubmit && f.qty.value=== null }">
+                  <div *ngIf="productSubmit && f.qty.value=== null " class="invalid-feedback">
+                      Quantity Is Required
+                    </div>
+              </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Unit Price</label>
+                  <input type="number" formControlName="unitPrice"   class="form-control no-spinners" placeholder="Enter Unit Price" [ngClass]="{ 'is-invalid': productSubmit && f.unitPrice.value=== null }">
+                  <div *ngIf="productSubmit && f.unitPrice.value=== null " class="invalid-feedback">
+                      Unit Price Required
+                    </div>
+                 
+              </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                  <label>Reference</label>
+                  <input type="text" formControlName="reference" class="form-control no-spinners" placeholder="Enter Reference">
+              </div>
+              <div class="col-sm-2 px-2 pt-2 float-left">
+                <label>Amount</label>
+                <input type="number"  formControlName="amount" class="form-control no-spinners" placeholder="Amount" [ngClass]="{ 'is-invalid': productSubmit && f.amount.value=== null }" readonly>
+                <div *ngIf="productSubmit && f.amount.value=== null " class="invalid-feedback">
+                    Enter Amount
+                  </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-1">
+              <div class="form-group col-sm-4">
+                  <a class="gx-btn btn-success gx-btn-sm mt-new mb-0 btn-top" (click)="addProduct()">+ Add Product</a>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2">
+                <div class="col-sm-4 px-2 pt-2 float-left">
+                  <label><strong class="font-size-15px">Product List</strong></label>
+                </div>
+              </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                    <thead>
+                    <tr role="row">
+                        <th tabindex="0" rowspan="1" colspan="1">Sr. No.</th>                      
+                        <th tabindex="0" rowspan="1" colspan="1">Product Code</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Product Name</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Quantity</th>
+                        <th tabindex="0" rowspan="1" colspan="1">UOM</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Unit Price</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Amount</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Reference</th>
+                        <th tabindex="0" rowspan="1" colspan="1">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="gradeA odd" role="row" *ngFor="let item of itemDto;index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{item.sku}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.qty}}</td>
+                        <td>{{item.uom}}</td>
+                        <td>{{item.unitPrice | number:'1.0-2'}}</td>
+                        <td>{{item.amount | number:'1.0-2'}}</td>
+                        <td>{{item.reference}}</td>
+                        <td><a (click)="deleteEnquiryItem(item)" class="btn btn-danger a-btn-slide-text"><span class="zmdi zmdi-delete icon-inline:false"></span></a>
+                            <a (click)="editItem(item)" class="btn gx-btn-lime a-btn-slide-text"><span class="zmdi zmdi-edit icon-inline:false"></span></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+  
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
+              <!-- <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 float-left">
+              <div class="col-sm-12 px-2 pt-2">
+                <label>Discount</label>
+                <input hidden type="text" class="form-control" placeholder="Enter Discount">
+              </div>
+              <div class="col-sm-12 px-2 pt-2">
+                  <label>VAT</label>
+                  <input  type="number" class="form-control no-spinners" placeholder="Enter VAT">
+              </div>
+            </div> -->
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 float-left">
+              <div class="col-sm-6 offset-sm-6">
+                <div class="table-responsive mt-2">
+                  <table class="table table-striped table-bordered table-hover dataTables-example dataTable mt-4">
+                    <tbody>
+                        <tr>
+                          <th>TOTAL</th>
+                          <td>{{total | number:'1.0-2'}}</td>
+                        </tr>
+                        <!-- <tr>
+                          <th>GRAND TOTAL</th>
+                          <td>{{grandTotal}}</td>
+                        </tr> -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-12 col-sm-12 text-right">
+            <button type="submit"  class="gx-btn btn-success gx-btn-sm">SAVE</button>
+            <a *ngxPermissionsOnly="['sales-enquiry-authorize']" (click)="authorize()" class="gx-btn gx-btn-cyan gx-btn-sm text-white">AUTHORIZE</a>
+            <a routerLink="/sales/enquiry"  class="gx-btn btn-danger gx-btn-sm">CLOSE</a>
+            <a (click)="reset()" class="gx-btn gx-btn-red gx-btn-sm text-white">RESET</a>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
