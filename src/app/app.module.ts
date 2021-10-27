@@ -126,6 +126,7 @@ import { NewMasterSubModuleComponent } from './components/new-master-sub-module/
 import { EditMasterSubModuleComponent } from './components/edit-master-sub-module/edit-master-sub-module.component';
 import { UserAccessManagementComponent } from './components/user-access-management/user-access-management.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ReturnPurchaseInvoiceComponent } from './components/return-purchase-invoice/return-purchase-invoice.component';
 
 
 
@@ -246,8 +247,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     NewMasterSubModuleComponent,
     EditMasterSubModuleComponent,
     UserAccessManagementComponent,
-    WelcomeComponent
-   
+    WelcomeComponent,
+    ReturnPurchaseInvoiceComponent,
   ],
   imports: [
     BrowserModule,

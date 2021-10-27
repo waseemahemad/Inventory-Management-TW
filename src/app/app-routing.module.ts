@@ -91,6 +91,7 @@ import { EditMasterSubModuleComponent } from './components/edit-master-sub-modul
 import { NewMasterSubModuleComponent } from './components/new-master-sub-module/new-master-sub-module.component';
 import { UserAccessManagementComponent } from './components/user-access-management/user-access-management.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ReturnPurchaseInvoiceComponent } from './components/return-purchase-invoice/return-purchase-invoice.component';
 
 
 export const appRoutes: Routes = [
@@ -295,6 +296,10 @@ export const appRoutes: Routes = [
           {
             path:'edit/:id/invoice',
             component:EditPurchaseInvoiceComponent
+          },
+          {
+            path:'new/return',
+            component:ReturnPurchaseInvoiceComponent
           },
         ]
       },
